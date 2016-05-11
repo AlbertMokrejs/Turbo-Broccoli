@@ -22,7 +22,7 @@ def checkGenerate(version):
       #Makes tables.
       connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
-      List = [["testTable","field1","field2"],["testTable2","a","b","c","d"],["version","v"]]
+      List = [["testTable","field1","TEXT","field2","TEXT"],["testTable2","a","REAL","b","TEXT","c","TEXT","d","TEXT"],["version","v","TEXT"]]
       for q in List:
          makeTable(q[0],q[1:])
          insertValue("version",version)
@@ -36,17 +36,22 @@ def makeTable(name, arg):
    conn.commit()
       
 def insertValue(name, arg):
-    conn = sqlite3.connect("Calendar.db")
-    c = conn.cursor()
-    q = """insert into %s values (%s);""" % (name, str([ str(x) for x in arg])[1::][::-1][1::][::-1])
-    c.execute(q)
-    conn.commit()
+   conn = sqlite3.connect("Calendar.db")
+   c = conn.cursor()
+   q = """insert into %s values (%s);""" % (name, str([ str(x) for x in arg])[1::][::-1][1::][::-1])
+   c.execute(q)
+   conn.commit()
 
 def findMatching(name, arg):
-    conn = sqlite3.connect("GeoHashCache.db")
-    c = conn.cursor()
-    q = """SELECT * FROM %s %s""" % (name, "".join("".join(str(["WHERE %s.%s = %s," % (name, x[0], x[1]) for x in arg])[1::][::-1][1::][::-1].split(", ")).split("'"))[::-1][1::][::-1] + ";")
-    result = c.execute(q)
-    for r in result:
-        return r
-    return []
+   conn = sqlite3.connect("Calendar.db")
+   c = conn.cursor()
+   q = """SELECT * FROM %s %s""" % (name, "".join("".join(str(["WHERE %s.%s = %s," % (name, x[0], x[1]) for x in arg])[1::][::-1][1::][::-1].split(", ")).split("'"))[::-1][1::][::-1] + ";")
+   result = c.execute(q)
+   return [r for r in result]
+    
+def test():
+   checkGenerate("version0")
+   insertValue("testTable",["a","b"])
+   insertValue("testTable2",["1","2","3","b"])
+   insertValue("testTable2",["2","3","4","b"])
+   findMatching("testTable",["field1","a"])
