@@ -7,9 +7,9 @@ import marshal
 #
 def checkGenerate(version):
    #Checks if there is a database file.
-   x = os.path.isfile("GeoHashCache.db")
+   x = os.path.isfile("Calendar.db")
    if x:
-      connect = sqlite3.connect("GeoHashCache.db")
+      connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
       q = """SELECT * FROM version;"""
       result = curs.execute(q)
@@ -17,10 +17,10 @@ def checkGenerate(version):
          if r[0] != version:
             print "INVALID VERSION. \n WIPING AND UPDATING."
             x = False
-            os.remove("GeoHashCache.db")
+            os.remove("Calendar.db")
    if not x:
       #Makes tables.
-      connect = sqlite3.connect("GeoHashCache.db")
+      connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
       List = ["""
    CREATE TABLE login(
@@ -58,85 +58,20 @@ def checkGenerate(version):
    );"""]
       List.append("""insert into version values ('%s');""" % (version))
       for q in List:
-         curs.execute(q)
-         connect.commit()
+         makeTable(q[0],q[1:])
       print "VERSION UP TO DATE"
 
-#Finds the ID of the latest Cache as IDs are sequential. 
-def greatestCacheID():
-    #Gets all caches.
-    conn = sqlite3.connect("GeoHashCache.db")
-    c = conn.cursor()
-    q="""SELECT * FROM caches;
-    	"""
-    result = c.execute(q)
-    #Loops through all IDs to find the greatest, starting at 0.
-    x = 0
-    print result
-    for r in result:
-        if r[5] > x:
-            x = r[5]
-    print x
-    return x
-
-#Finds the ID of the latest comment.
-#Comments were never implemented, making this method useless.
-def lowestCommentID():
-    #Gets all comments.
-    conn = sqlite3.connect("GeoHashCache.db")
-    c = conn.cursor()
-    q="""SELECT * FROM comments;
-    	"""
-    result = c.execute(q)
-    #Loops through all IDs to find the lowest, starting at -1.
-    x = -1
-    for r in result:
-        if r[1] < x:
-            x = r[1]
-    return x
-
-
-#Finds the greatest userID as IDs are sequential.
-def greatestUserID():
-    #Gets all caches.
-    conn = sqlite3.connect("GeoHashCache.db")
-    c = conn.cursor()
-    q="""SELECT * FROM login;
-    	"""
-    result = c.execute(q)
-    #Loops through all IDs to find the greatest, starting at 0.
-    x = 0
-    for r in result:
-        if r[2] > x:
-            x = r[2]
-    return x
-
+def makeTable(name, arg):
+   conn = sqlite3.connect("Calendar.db")
+   c = conn.cursor()
+   q = """CREATE TABLE %s(%s)""" % (name, "".join(str([x for x in arg])[1::][::-1][1::][::-1].split("'")))
+   c.execute(q)
+   conn.commit()
+      
 #Makes a new user account using the current data.
-def createUser(username,password,uid,email,date):
-    conn = sqlite3.connect("GeoHashCache.db")
+def insertValue(name, arg):
+    conn = sqlite3.connect("Calendar.db")
     c = conn.cursor()
-    q = """insert into login values ('%s','%s',%s,'%s','%s','%s');""" % (username,password,uid,base64.b64encode(str(marshal.dumps([]))),email,date )
-    c.execute(q)
-    conn.commit()
-
-#Makes a new cache using the current data.
-def createCache(Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date):
-    conn = sqlite3.connect("GeoHashCache.db")
-    c = conn.cursor()
-    q = """insert into caches values (%s,%s,'%s','%s','%s',%s,%s,'%s','%s',%s);""" % (Latitude, Longitude, Type, Name, Description, Cacheid, Validid, Founder, Date, 0)
-    print q
-    c.execute(q)
-    conn.commit()
-    q = """insert into cacheIDs values (%s,%s);""" % (Cacheid, Validid)
-    print q
-    c.execute(q)
-    conn.commit
-
-#Makes a new comment using the current data.
-#Comments were never implemented
-def createComment(Parentid, Commentid, Content, Date, Author):
-    conn = sqlite3.connect("GeoHashCache.db")
-    c = conn.cursor()
-    q = """insert into comments values (%s,%s,'%s','%s','%s');""" % (Parentid, Commentid, Content, Date, Author)
+    q = """insert into %s values (%s);""" % (name, str([ str(x) for x in arg])[1::][::-1][1::][::-1])
     c.execute(q)
     conn.commit()
