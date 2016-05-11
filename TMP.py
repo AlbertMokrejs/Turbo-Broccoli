@@ -75,3 +75,12 @@ def insertValue(name, arg):
     q = """insert into %s values (%s);""" % (name, str([ str(x) for x in arg])[1::][::-1][1::][::-1])
     c.execute(q)
     conn.commit()
+
+def findMatching(name, arg):
+    conn = sqlite3.connect("GeoHashCache.db")
+    c = conn.cursor()
+    q = """SELECT * FROM %s %s""" % (name, "".join("".join(str(["WHERE %s.%s = %s," % (name, x[0], x[1]) for x in arg])[1::][::-1][1::][::-1].split(", ")).split("'"))[::-1][1::][::-1] + ";")
+    result = c.execute(q)
+    for r in result:
+        return r
+    return []
