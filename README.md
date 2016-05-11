@@ -1,11 +1,16 @@
 # Calender-based Club Management System
 
+
 ##General Proposal:
+
 
 ##Timeline:
 
+
 ##ChangeList:
-- (Shawn) 05/11/16: Made readme skeleton
+1. (Shawn) 05/11/16: Made readme skeleton
+  * Need general proposal
+  * Need to determine schedule/timeline
 
 ## Contributors
 |**Profile Picture**|    **Name**    |    **Role**    |    **Github**    |
