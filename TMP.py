@@ -22,43 +22,10 @@ def checkGenerate(version):
       #Makes tables.
       connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
-      List = ["""
-   CREATE TABLE login(
-      Username TEXT,
-      Password TEXT,
-      Uid REAL,
-      Profile BLOB,
-      Email TEXT,
-      Last TEXT
-   );""","""CREATE TABLE caches(
-      Latitude REAL, 
-      Longitude REAL,
-      Type TEXT,
-      Name TEXT,
-      Description TEXT,
-      Cacheid REAL,
-      Validid REAL,
-      Founder TEXT,
-      Date TEXT,
-      Status REAL
-   );""","""CREATE TABLE comments(
-      Parentid REAL,
-      Commentid REAL,
-      Content TEXT,
-      Date TEXT,
-      Author TEXT
-   );
-   """,
-   """CREATE TABLE cacheIDs(
-      Cacheid REAL,
-      Validid REAL);
-   ""","""
-   CREATE TABLE version(
-     version TEXT
-   );"""]
-      List.append("""insert into version values ('%s');""" % (version))
+      List = [["testTable","field1","field2"],["testTable2","a","b","c","d"],["version","v"]]
       for q in List:
          makeTable(q[0],q[1:])
+         insertValue("version",version)
       print "VERSION UP TO DATE"
 
 def makeTable(name, arg):
@@ -68,7 +35,6 @@ def makeTable(name, arg):
    c.execute(q)
    conn.commit()
       
-#Makes a new user account using the current data.
 def insertValue(name, arg):
     conn = sqlite3.connect("Calendar.db")
     c = conn.cursor()
