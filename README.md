@@ -1,5 +1,11 @@
-# Turbo-Broccoli
-THE FASTEST OF BROCCOLI
+# Calender-based Club Management System
+
+##General Proposal:
+
+##Timeline:
+
+##ChangeList:
+- (Shawn) 05/11/16: Made readme skeleton
 
 ## Contributors
 |**Profile Picture**|    **Name**    |    **Role**    |    **Github**    |
