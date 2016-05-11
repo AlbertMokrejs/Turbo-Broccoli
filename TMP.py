@@ -82,5 +82,5 @@ def findMatching(name, arg):
     q = """SELECT * FROM %s %s""" % (name, "".join("".join(str(["WHERE %s.%s = %s," % (name, x[0], x[1]) for x in arg])[1::][::-1][1::][::-1].split(", ")).split("'"))[::-1][1::][::-1] + ";")
     result = c.execute(q)
     for r in result:
-        return [r[0],r[1],r[2],r[4],r[5]]
-    return ["","",0,"",""]
+        return r
+    return []
