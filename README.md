@@ -5,7 +5,9 @@
 
 
 ##Timeline:
-
+1. 5/13/16
+  * General Proposal
+  * Timeline
 
 ##ChangeList:
 1. (Shawn) 05/11/16: Made readme skeleton
