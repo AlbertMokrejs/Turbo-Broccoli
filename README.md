@@ -11,6 +11,8 @@
 1. (Shawn) 05/11/16: Made readme skeleton
   * Need general proposal
   * Need to determine schedule/timeline
+2. (Sarah) 05/11/16: Made basic calendar css
+ 
 
 ## Contributors
 |**Profile Picture**|    **Name**    |    **Role**    |    **Github**    |
