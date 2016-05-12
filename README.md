@@ -4,17 +4,18 @@
 ##General Proposal:
 
 
-##Timeline:
+##Goals:
 1. 5/13/16
   * General Proposal
-  * Timeline
-
+  * Goals
+2. 5/16/16
+  * Implement javascript so that the calender automatically formats to current month
+ 
 ##ChangeList:
 1. (Shawn) 05/11/16: Made readme skeleton
   * Need general proposal
-  * Need to determine schedule/timeline
+  * Need to determine schedule/goals
 2. (Sarah) 05/11/16: Made basic calendar css
- 
 
 ## Contributors
 |**Profile Picture**|    **Name**    |    **Role**    |    **Github**    |
