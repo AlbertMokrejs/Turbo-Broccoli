@@ -62,6 +62,6 @@ body {font-family: Verdana, sans-serif;}
 .days li .active {
       padding: 5px;
       background: #1abc9c;
-      coor: white !important
+      color: white !important
 
     }
