@@ -5,6 +5,14 @@ import json
 
 
 def checkGenerate(version):
+   if not os.path.isfile("Calendar.db"):
+      connect = sqlite3.connect("Calendar.db")
+      curs = connect.cursor()
+      TableList = [["testTable","field1 TEXT","field2 TEXT"],["testTableB","a REAL","b TEXT","c TEXT","d TEXT"],["version","v TEXT"]]
+      for q in TableList:
+         makeTable(q[0],q[1:])
+      insertValue("version",[version])
+      print "VERSION UP TO DATE."
    if os.path.isfile("Calendar.db"):
       try:
          result = runSQL(True, """SELECT * FROM version;""")
@@ -13,19 +21,12 @@ def checkGenerate(version):
                print "INVALID VERSION. \n WIPING AND UPDATING."
                x = False
                os.rename("Calendar.db","Archive.db")
+               checkGenerate(version)
       except:
          pass
-   if not os.path.isfile("Calendar.db"):
-      os.remove("Calendar.db")
-      connect = sqlite3.connect("Calendar.db")
-      curs = connect.cursor()
-      TableList = [["testTable","field1 TEXT","field2 TEXT"],["testTableB","a REAL","b TEXT","c TEXT","d TEXT"],["version","v TEXT"]]
-      for q in TableList:
-         makeTable(q[0],q[1:])
-      insertValue("version",version)
-      print "VERSION UP TO DATE"
+   
          
-def runSQL( doesReturn, q)
+def runSQL( doesReturn, q):
    conn = sqlite3.connect("Calendar.db")
    c = conn.cursor()
    if doesReturn:
@@ -47,7 +48,7 @@ def makeTableJSON(a):
 
       
 def insertValue(name, arg):
-   runSQL(False,"""insert into %s values (%s);""" % (name, str([ str(x) for x in arg])[1::][::-1][1::][::-1]))
+   runSQL(False, q = """insert into %s values (%s);""" % (name, str([ str(x) for x in arg])[1::][::-1][1::][::-1]))
    
 def insertValueJSON(a):
    result = json.loads(a)
@@ -71,7 +72,8 @@ def test():
    insertValue("testTable",["a","b"])
    insertValue("testTableB",[1,"2","3","b"])
    insertValue("testTableB",[2,"3","4","b"])
-   print findMatching("testTable",{"field1":"a"})
+   print findMatching("testTable",{})
+   print findMatching("testTable",{"field1":"'a'"})
    print findMatching("testTableB",{"a":"1"})
    print findMatching("testTableB",{"d":"'b'"})
 
