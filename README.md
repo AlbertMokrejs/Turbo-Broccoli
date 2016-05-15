@@ -2,17 +2,27 @@
 
 
 ##General Proposal:
-#Replace the Stuyvesant Student Union's current google calendar with one that
-1. Makes sense with the current design.
-2. Has features that google calender doesn't have but the client needs.
+**Replace the Stuyvesant Student Union's current google calendar with one that**
+
+**1. makes sense with the current design.**
+**2. has features not provided by google calender but required by the client**
 
 ##Goals:
 1. 5/13/16
-  * General Proposal
-  * Goals
+  * ~~General Proposal~~
+  * ~~Goals~~
 2. 5/16/16
-  * Implement javascript so that the calender automatically formats to current month
- 
+  * Implement javascript so that the calender automatically formats to current month.
+  * Find appropriate bootstrap.
+3. 5/20/16
+  * Complete the form required to reserve the room.
+4. 5/25/16
+  * Adjust the calendar to fit the needs of club managers.
+5. 5/27/16
+  * Include maps of rooms
+6. 6/6/16
+  * Finish extraneous bugs and design choices
+
 ##ChangeList:
 1. (Shawn) 05/11/16: Made readme skeleton
   * Need general proposal
