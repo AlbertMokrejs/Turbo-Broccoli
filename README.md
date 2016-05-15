@@ -1,8 +1,10 @@
-# Calender-based Club Management System
+# Calendar-based Club Management System
 
 
 ##General Proposal:
-
+#Replace the Stuyvesant Student Union's current google calendar with one that
+1. Makes sense with the current design.
+2. Has features that google calender doesn't have but the client needs.
 
 ##Goals:
 1. 5/13/16
