@@ -4,8 +4,8 @@
 ##General Proposal:
 **Replace the Stuyvesant Student Union's current google calendar with one that**
 
-**1. makes sense with the current design.**
-**2. has features not provided by google calender but required by the client**
+1. makes sense with the current design.
+2. has features not provided by google calender but required by the client
 
 ##Goals:
 1. 5/13/16
