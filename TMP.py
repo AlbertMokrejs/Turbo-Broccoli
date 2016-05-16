@@ -37,6 +37,16 @@ def runSQL( doesReturn, q):
       c.execute(q)
       conn.commit()
    
+def addReservation(club,email,name,room,date,timeS,timeE):
+   isTaken = len(findMatching("Reservations",{"date":date, "room":room})) > 0
+   if not isTaken:
+      pushReservation(club,email,name,room,date,timeS,timeE,0)
+      return True
+   return False
+
+def pushReservation(club,email,name,room,date,timeS,timeE,UID):
+   insertValue("Reservations", [club,email,name,room,date,timeS,timeE,UID])
+
 
 def makeTable(name, arg):
    runSQL(False, """CREATE TABLE %s(%s)""" % (name, "".join(str([x for x in arg])[1::][::-1][1::][::-1].split("'"))))
