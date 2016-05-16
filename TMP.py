@@ -8,7 +8,7 @@ def checkGenerate(version):
    if not os.path.isfile("Calendar.db"):
       connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
-      TableList = [["testTable","field1 TEXT","field2 TEXT"],["testTableB","a REAL","b TEXT","c TEXT","d TEXT"],["version","v TEXT"]]
+      TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL"],["version","v TEXT"]]
       for q in TableList:
          makeTable(q[0],q[1:])
       insertValue("version",[version])
@@ -77,5 +77,5 @@ def test():
    print findMatching("testTableB",{"a":"1"})
    print findMatching("testTableB",{"d":"'b'"})
 
-test()
+
    
