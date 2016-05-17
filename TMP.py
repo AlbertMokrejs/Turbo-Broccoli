@@ -4,11 +4,12 @@ import marshal
 import json
 
 
+
 def checkGenerate(version):
    if not os.path.isfile("Calendar.db"):
       connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
-      TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL"],["version","v TEXT"]]
+      TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL","Club TEXT"],["version","v TEXT"]]
       for q in TableList:
          makeTable(q[0],q[1:])
       insertValue("version",[version])
@@ -36,7 +37,17 @@ def runSQL( doesReturn, q):
    else:
       c.execute(q)
       conn.commit()
+
+def register(email, name, club, password):
+   isTaken = len(findMatching("Users",{"email":email})) > 0
+   if not isTaken:
+      insertValue("Users",[name, email, password, 'base64.b64encode(marshal.dumps([]))',0,club])
+      return True
+   return False
    
+def login(email,password):
+   return findMatching("Users",{"email":email,"password":password})
+
 def addReservation(club,email,name,room,date,timeS,timeE):
    isTaken = len(findMatching("Reservations",{"date":date, "room":room})) > 0
    if not isTaken:
