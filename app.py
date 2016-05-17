@@ -10,17 +10,13 @@ def start():
 #route to register a user
 @app.route("/register")
 def register():
-    return null
+    return render_template("register.html")
 
 #route to login, subject to change
 @app.route("/login")
 def login():
-    return null
+    return render_template("login.html")
 
-#route to calender, and potentinally the reservation form
-@app.route("/calender")
-def calender():
-    return null
 
 #overall route to pass something to backend from front without reloading page
 @app.route("/get_functions")
