@@ -1,0 +1,36 @@
+table {
+      border: 1px solid #999;
+      border-collapse: collapse;
+      width: 70%;
+      align: center;
+}		       
+th {
+   border: 1px solid #999;
+   font-size: 70%;
+   text-transform: uppercase;
+   width: 10%;
+}
+td {
+   border: 1px solid #999;
+   height: 5em;
+   width:10%;
+   padding: 5px;
+   vertical-align: top;
+}
+caption {
+  font-size: 300%;
+  font-style: italic;
+}
+.day {
+     text-align: right;
+}
+.notes {
+       font-family: Arial, Helvetica, sans-serifl
+       font-size: 80%;
+       text-align: left;
+       padding-right: 10px;
+}
+.weekend {
+	 background-color: #F3F3F3;
+}
+
