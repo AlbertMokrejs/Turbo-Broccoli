@@ -3,8 +3,6 @@ import base64
 import marshal
 import json
 
-
-
 def checkGenerate(version):
    if not os.path.isfile("Calendar.db"):
       connect = sqlite3.connect("Calendar.db")
@@ -25,7 +23,6 @@ def checkGenerate(version):
                checkGenerate(version)
       except:
          pass
-   
          
 def runSQL( doesReturn, q):
    conn = sqlite3.connect("Calendar.db")
@@ -49,7 +46,9 @@ def login(email,password):
    return findMatching("Users",{"email":email,"password":password})
 
 def addReservation(club,email,name,room,date,timeS,timeE):
-   isTaken = len(findMatching("Reservations",{"date":date, "room":room})) > 0
+   isTaken = False
+   if weekDay(data.split("/")) == 1:
+      isTaken = len(findMatching("Reservations",{"date":date, "room":room})) > 0
    if not isTaken:
       pushReservation(club,email,name,room,date,timeS,timeE,0)
       return True
@@ -97,6 +96,8 @@ def test():
    print findMatching("testTable",{"field1":"'a'"})
    print findMatching("testTableB",{"a":"1"})
    print findMatching("testTableB",{"d":"'b'"})
+   
+
 
 #http://stackoverflow.com/questions/9847213/which-day-of-week-given-a-date-python
 def weekDay(year, month, day):
