@@ -12,7 +12,7 @@ h1 {
     font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
 }
-button {
+.button {
   display: block;
   border-radius: 4px;
   background-color: black;
@@ -28,14 +28,14 @@ button {
   font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-button span {
+.button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-button span:after {
+.button span:after {
   content: "\00BB";
   position: absolute;
   opacity: 0;
@@ -44,20 +44,20 @@ button span:after {
   transition: 0.5s;
 }
 
-button:hover {
+.button:hover {
     background-color: white;
     color: black;
 }
 
-button:hover span {
+.button:hover span {
   padding-right: 25px;
 }
 
-button:hover span:after {
+.button:hover span:after {
   opacity: 1;
   right: 0;
 }
-#button{
+#bookroom{
     width: 200px;
     height: 200px;
     margin-left: auto;
