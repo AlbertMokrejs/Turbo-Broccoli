@@ -98,5 +98,17 @@ def test():
    print findMatching("testTableB",{"a":"1"})
    print findMatching("testTableB",{"d":"'b'"})
 
-
+#http://stackoverflow.com/questions/9847213/which-day-of-week-given-a-date-python
+def weekDay(year, month, day):
+    offset = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
+    week   = [0,1,1,1,1,1,0]
+    afterFeb = 1
+    if month > 2: afterFeb = 0
+    aux = year - 1700 - afterFeb
+    dayOfWeek  = 5
+    dayOfWeek += (aux + afterFeb) * 365                  
+    dayOfWeek += aux / 4 - aux / 100 + (aux + 100) / 400     
+    dayOfWeek += offset[month - 1] + (day - 1)               
+    dayOfWeek %= 7
+    return dayOfWeek, week[dayOfWeek]
    
