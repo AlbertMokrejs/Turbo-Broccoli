@@ -79,7 +79,7 @@ def findMatching(name, arg):
    q = """SELECT * FROM %s WHERE """ % (name)
    for x in arg.keys():
       q += "%s.%s = '%s' AND " % (name, x, arg[x])
-   q = q[::-1][3::][::-1] + ";"
+   q = q[::-1][4::][::-1] + ";"
    print q
    result = runSQL(True, q)
    return [r for r in result]
