@@ -3,82 +3,86 @@
   <head>
     <title> Club Management Calendar</title>
     <link rel="stylesheet" type="text/css" href="../static/style.css">
-    <link rel="stylesheet" type="text/css" href="static/calendar.css">
+    <link rel="stylesheet" type="text/css" href="../static/calendar.css">
   </head>
   <body>
-    <div>
+    <div id="container">
       <div id="header">
-	<h1>Club Management Calendar</h1>
+				<h1>Club Management Calendar</h1>
+				<button class="butttwo" OnClick="location.href='register.html'"><span>Sign Up</span></button>
+				<button class="butttwo" OnClick="location.href='login.html'"><span>Log In</span></button>
       </div>
-    </div>
-    <div class="calendar">
-      <table align="center">
-    	<caption>MONTH</caption>
-	<col class="weekend">
-	<col class="weekday" span="5">
-	<col class="weekend">
-	<thead>
-	  <tr>
-	    <th>Sun</th>
-	    <th>Mon</th>
-	    <th>Tue</th>
-	    <th>Wed</th>
-	    <th>Thu</th>
-	    <th>Fri</th>
-	    <th>Sat</th>
-	  </tr>
-    	</thead>
-    	<tbody>
-	  <tr>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	  </tr>
-	  <tr>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	  </tr>
-	  <tr>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	  </tr>
-	  <tr>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	  </tr>
-	  <tr>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	    <td><div class="day"></div></td>
-	  </tr>
-    	</tbody>
-      </table>
-      <div id="bookroom">
-  	<button class="button1">OnClick="location.href='room.html'"><span>Book Date</span></button>
-      </div>
+			<div id="content">
+				<div class="calendar">
+					<table align="center">
+						<caption>MONTH</caption>
+						<col class="weekend">
+						<col class="weekday" span="5">
+						<col class="weekend">
+						<thead>
+							<tr>
+								<th>Sun</th>
+								<th>Mon</th>
+								<th>Tue</th>
+								<th>Wed</th>
+								<th>Thu</th>
+								<th>Fri</th>
+								<th>Sat</th>
+							</tr>
+								</thead>
+								<tbody>
+							<tr>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+							</tr>
+							<tr>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+							</tr>
+							<tr>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+							</tr>
+							<tr>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+							</tr>
+							<tr>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+								<td><div class="day"></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="bookroom">
+					<button class="button" OnClick="location.href='room.html'"><span>Book Date</span></button>
+				</div>
+			</div>
     </div>
   </body>
 </html>

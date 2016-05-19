@@ -7,12 +7,20 @@ body {
     font-weight: 100;
     overflow: hidden;
 }
+.calendar {
+  width: 100%;
+  height: 100%;
+}
 h1 {
     font-weight: 100;
     font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
+    float: left;
+    display: inline-block;
+    margin-top: 5px;
 }
 .button {
+  float: right;
   display: block;
   border-radius: 4px;
   background-color: black;
@@ -57,10 +65,65 @@ h1 {
   opacity: 1;
   right: 0;
 }
+.butttwo {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  width: 100px;
+  padding: 8px 20px;
+  cursor: pointer;
+  margin: 5px;
+  float: right;
+  font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.butttwo span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.butttwo span:after {
+  content: "\00BB";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.butttwo:hover {
+    background-color: white;
+    color: black;
+}
+
+.butttwo:hover span {
+  padding-right: 10px;
+}
+
+.butttwo:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 #bookroom{
     width: 200px;
     height: 200px;
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+#container {
+  height: 100%;
+  width: 100%;
+}
+#content {
+  clear: both;
+}
+#header {
+  width: 99vw;
+  line-height: 36px;
 }
