@@ -76,9 +76,9 @@ def insertValueJSON(a):
 
 
 def findMatching(name, arg):
-   q = """SELECT * FROM %s """ % (name)
+   q = """SELECT * FROM %s WHERE """ % (name)
    for x in arg.keys():
-      q += "WHERE %s.%s = '%s' AND" % (name, x, arg[x])
+      q += "%s.%s = '%s' AND " % (name, x, arg[x])
    q = q[::-1][3::][::-1] + ";"
    print q
    result = runSQL(True, q)
