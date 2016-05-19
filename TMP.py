@@ -38,7 +38,7 @@ def runSQL( doesReturn, q):
 def register(email, name, club, password):
    isTaken = len(findMatching("Users",{"email":email})) > 0
    if not isTaken:
-      insertValue("Users",[name, email, password, "'" + base64.b64encode(marshal.dumps([])) + "'",0,club])
+      insertValue("Users",["'" + name + "'","'" + email + "'","'" + password + "'", "'" + base64.b64encode(marshal.dumps([])) + "'",0,"'" + club + "'"])
       return True
    return False
    
