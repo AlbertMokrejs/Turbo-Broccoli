@@ -28,6 +28,7 @@
   * Need general proposal
   * Need to determine schedule/goals
 2. (Sarah) 05/11/16: Made basic calendar css
+3. (Derry) 5/19/16: Path file started. Login and Register paths set up
 
 ## Contributors
 |**Profile Picture**|    **Name**    |    **Role**    |    **Github**    |
