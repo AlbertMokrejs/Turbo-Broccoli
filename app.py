@@ -1,7 +1,9 @@
-
+ 
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
 app = Flask(__name__)
+TMP.checkGenerate("0")
+print("run?")
 
 #home route, subject to change what it loads
 @app.route("/")
@@ -28,7 +30,8 @@ def register():
                 if (TMP.register(email,name,cname,password1)):
                     print("reg.2.1.1.1")
                     session["username"] = email
-                    return redirect(url_for('/', email = email))
+                    return render_template("register.html", text = "yay")
+                   # return redirect(url_for('/', email = email))
                 else:
                     print("reg.2.1.1.2")
                     return render_template("register.html", text = "The email is already taken")
@@ -58,7 +61,8 @@ def login():
             if(TMP.login(email,password)):
                 print("log.2.1.1")
                 session["username"] = email
-                return redirect(url_for('/', email=email))
+                return render_template("login.html", text = "yay")
+                #return redirect(url_for('/', email=email))
             else:
                 print("log.2.1.2")
                 return render_template("login.html", text = "Email/Password do not match")
