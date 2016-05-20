@@ -70,7 +70,7 @@ def getReservations():
             final.append(x)
    counter = 0
    while counter < len(final) - 1:
-      if int(final[4][counter]) > int(final[4][counter + 1]):
+      if int(final[counter][4]) > int(final[counter][4] + 1]):
          tmp = final[counter]
          final[counter] = final[counter + 1]
          final[counter + 1] = tmp
