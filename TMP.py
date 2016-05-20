@@ -57,6 +57,8 @@ def addReservation(club,email,name,room,date,timeS,timeE):
 def pushReservation(club,email,name,room,date,timeS,timeE,UID):
    insertValue("Reservations", [club,email,name,room,date,timeS,timeE,UID])
 
+def getReservations():
+   return findMatching("Reservations",{})
 
 def makeTable(name, arg):
    runSQL(False, """CREATE TABLE %s(%s)""" % (name, "".join(str([x for x in arg])[1::][::-1][1::][::-1].split("'"))))
