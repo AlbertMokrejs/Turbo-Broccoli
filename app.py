@@ -32,7 +32,7 @@ def register():
                     session["username"] = email
                     #return render_template("register.html", text = "yay")
                 
-                   return redirect(url_for('start', email = email))
+                    return redirect(url_for('start'))
                 else:
                     print("reg.2.1.1.2")
                     return render_template("register.html", text = "The email is already taken")
