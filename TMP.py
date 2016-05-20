@@ -47,7 +47,7 @@ def login(email,password):
 
 def addReservation(club,email,name,room,date,timeS,timeE):
    isTaken = False
-   if weekDay(data.split("/")) == 1:
+   if weekDay(date.split("/")) == 1:
       isTaken = len(findMatching("Reservations",{"date":date, "room":room})) > 0
    if not isTaken:
       pushReservation(club,email,name,room,date,timeS,timeE,0)
