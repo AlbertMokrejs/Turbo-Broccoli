@@ -70,7 +70,7 @@ def getReservations():
             final.append(x)
    counter = 0
    while counter < len(final) - 1:
-      if int(final[counter][4]) > int(final[counter + 1][4]):
+      if checkDates(final[counter][4], final[counter + 1][4]):
          tmp = final[counter]
          final[counter] = final[counter + 1]
          final[counter + 1] = tmp
@@ -78,6 +78,19 @@ def getReservations():
       else:
          counter += 1
    return final
+   
+def checkDates(a,b):
+   a = a.split("/")
+   b = b.split("/")
+   if a[0] > b[0]:
+      return True
+   if a[0] == b[0]:
+      if a[1] > b[1]:
+         return True
+      if a[1] == b[1]:
+         if a[2] > b[2]:
+            return True
+   return False
 
 def makeTable(name, arg):
    runSQL(False, """CREATE TABLE %s(%s)""" % (name, "".join(str([x for x in arg])[1::][::-1][1::][::-1].split("'"))))
