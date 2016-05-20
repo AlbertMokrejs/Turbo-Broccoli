@@ -30,8 +30,9 @@ def register():
                 if (TMP.register(email,name,cname,password1)):
                     print("reg.2.1.1.1")
                     session["username"] = email
-                    return render_template("register.html", text = "yay")
-                   # return redirect(url_for('/', email = email))
+                    #return render_template("register.html", text = "yay")
+                
+                   return redirect(url_for('start', email = email))
                 else:
                     print("reg.2.1.1.2")
                     return render_template("register.html", text = "The email is already taken")
@@ -40,7 +41,7 @@ def register():
                 return render_template("register.html", text = "Passwords do not match")
         else:
             print("reg.2.2")
-            return redirect(url_for('/'))
+            return redirect(url_for('start'))
     else:
         print("reg.3")
         return render_template("register.html")
@@ -61,8 +62,8 @@ def login():
             if(TMP.login(email,password)):
                 print("log.2.1.1")
                 session["username"] = email
-                return render_template("login.html", text = "yay")
-                #return redirect(url_for('/', email=email))
+                #return render_template("login.html", text = "yay")
+                return redirect(url_for('start', email=email))
             else:
                 print("log.2.1.2")
                 return render_template("login.html", text = "Email/Password do not match")
