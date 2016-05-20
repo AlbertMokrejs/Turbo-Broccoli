@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <head>
   <title> Register </title>
+<link rel="stylesheet" type="text/css" href="../static/style.css">
+<link rel="stylesheet" type="text/css" href="../static/forms.css">
 </head>
 <body>
-  <h1><center>Register</center></h1>
+  <div id="container">
+    <div id="header">
+  <h1>Register</h1>
   <br>
-  <center>
-    <div>
-      {{text}}
-    </div>
-    <div>
+</div>
+    
+    <div id="content">
       <form action="/register" method="POST">
 	<input type="email" name="uemail" placeholder="Email" required><br>
 	<input type="name" name="uname" placeholder="Name" required><br>
