@@ -64,10 +64,10 @@ def getReservations():
    final = []
    for x in res:
       if int(x[4].split("/")[0]) > int(date[0]):
-         final.push(x)
+         final.append(x)
       elif int(x[4].split("/")[0]) == int(date[0]):
          if int(x[4].split("/")[1]) >= int(date[1]):
-            final.push(x)
+            final.append(x)
    counter = 0
    while counter < len(final) - 1:
       if int(final[4][counter]) > int(final[4][counter + 1]):
