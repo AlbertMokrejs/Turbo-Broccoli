@@ -4,25 +4,25 @@ import marshal
 import json
 
 def checkGenerate(version):
-   if not os.path.isfile("Calendar.db"):
-      connect = sqlite3.connect("Calendar.db")
-      curs = connect.cursor()
+   if not os.path.isfile("Calendar.db"): #is it a file
+      connect = sqlite3.connect("Calendar.db") #make it a file
+      curs = connect.cursor() #connect to it
       TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL","Club TEXT"],["version","v TEXT"]]
-      for q in TableList:
-         makeTable(q[0],q[1:])
-      insertValue("version",[version])
-      print "VERSION UP TO DATE."
-   if os.path.isfile("Calendar.db"):
-      try:
-         result = runSQL(True, """SELECT * FROM version;""")
-         for r in result:
-            if r[0] != version:
-               print "INVALID VERSION. \n WIPING AND UPDATING."
-               x = False
-               os.rename("Calendar.db","Archive.db")
-               checkGenerate(version)
-      except:
-         pass
+      for q in TableList: #iterate list
+         makeTable(q[0],q[1:]) #make a table
+      insertValue("version",[version]) #put a version tag
+      print "VERSION UP TO DATE." #print
+   if os.path.isfile("Calendar.db"): #if its a file
+      try: #make an attempt
+         result = runSQL(True, """SELECT * FROM version;""") #get EVERYTHING
+         for r in result: #iterate EVERYTHING
+            if r[0] != version: #if version tag bad
+               print "INVALID VERSION. \n WIPING AND UPDATING." #fuck it, do it again
+               x = False #because variables
+               os.rename("Calendar.db","Archive.db") #archive the file
+               checkGenerate(version) #do it again, for real this time
+      except: #if attempt fucked up
+         pass #don't give a shit
          
 def runSQL( doesReturn, q):
    conn = sqlite3.connect("Calendar.db")
