@@ -2,6 +2,7 @@ import sqlite3, os.path
 import base64
 import marshal
 import json
+import time 
 
 def checkGenerate(version):
    if not os.path.isfile("Calendar.db"): #is it a file
