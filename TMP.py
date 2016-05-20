@@ -58,7 +58,25 @@ def pushReservation(club,email,name,room,date,timeS,timeE,UID):
    insertValue("Reservations", [club,email,name,room,date,timeS,timeE,UID])
 
 def getReservations():
-   return findMatching("Reservations",{})
+   res = findMatching("Reservations",{})
+   date=time.strftime("%Y/%m/%d").split("/")
+   final = []
+   for x in res:
+      if x[4].split("/")[0] > date[0]:
+         final.push(x)
+      elif x[4].split("/")[0] == date[0]:
+         if x[4].split("/")[1] >= date[1]:
+            final.push(x)
+   counter = 0
+   while counter < len(final) - 1:
+      if final[counter] > final[counter + 1]:
+         tmp = final[counter]
+         final[counter] = final[counter + 1]
+         final[counter + 1] = tmp
+         counter = 0
+      else:
+         counter += 1
+   return final
 
 def makeTable(name, arg):
    runSQL(False, """CREATE TABLE %s(%s)""" % (name, "".join(str([x for x in arg])[1::][::-1][1::][::-1].split("'"))))
