@@ -83,6 +83,13 @@ def get_functions():
 def set_functions():
     return null;
 
+
+
+TMP.addReservation("club1","club1@gmail.com","CLUB1","111","2016/7/15","3:40","4:00")
+TMP.addReservation("club2","club2@gmail.com","CLUB2","112","2016/8/15","3:40","4:00")
+TMP.addReservation("club3","club3@gmail.com","CLUB3","113","2015/7/15","3:40","4:00")
+print(TMP.getReservations())
+
 if __name__ == "__main__":
     app.secret_key= 'asidh19201o231l2k3j'
     app.debug = True;
