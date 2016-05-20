@@ -122,7 +122,7 @@ def test():
 
 #http://stackoverflow.com/questions/9847213/which-day-of-week-given-a-date-python
 def weekDay(a):
-    year, month, day = a[0],a[1],a[2]
+    year, month, day = int(a[0]),int(a[1]),int(a[2])
     offset = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
     week   = [0,1,1,1,1,1,0]
     afterFeb = 1
