@@ -80,14 +80,11 @@ def get_functions():
 
 #overall route to change something backend without reloading page
 @app.route("/set_functions")
-def set_functions():
-    return null;
+def set_res(club, email, name, room, date):
+    return TMP.addReservation(club, email, name, room, date, "3:35", "4;30");
 
 
-
-TMP.addReservation("club1","club1@gmail.com","CLUB1","111","2016/7/15","3:40","4:00")
-TMP.addReservation("club2","club2@gmail.com","CLUB2","112","2016/8/15","3:40","4:00")
-TMP.addReservation("club3","club3@gmail.com","CLUB3","113","2015/7/15","3:40","4:00")
+set_res("club1", "derry@gmail.com","Derry","111","2016/11/11")
 print(TMP.getReservations())
 
 if __name__ == "__main__":
