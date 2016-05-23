@@ -4,14 +4,18 @@
     <title> Club Management Calendar</title>
     <link rel="stylesheet" type="text/css" href="../static/style.css">
     <link rel="stylesheet" type="text/css" href="../static/calendar.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   </head>
   <body>
-<script src="../static/calendar.js"></script>
+	<script src="../static/calendar.js"></script>
     <div id="container">
       <div id="header">
 				<h1>Club Management Calendar</h1>
-				<button class="butttwo" OnClick="location.href='/register'"><span>Sign Up</span></button>
-				<button class="butttwo" OnClick="location.href='/login'"><span>Log In</span></button>
+				<a href="register.html" class="butttwo"><span>Sign Up</span></a>
+				<a href="login.html" class="butttwo"><span>Log In</span></a>
       </div>
 	  <div id="content">
 	  	<div id="calendar">
@@ -81,8 +85,30 @@
 					</table>
 				</div>
 				<div id="bookroom">
-					<button class="button" OnClick="location.href='room.html'"><span>Book Date</span></button>
+					<a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></button>
 				</div>
+				<div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
+      				<form method="post" action="demoform.asp">
+        				<div>
+          					<h3>Make a Room Reservation</h3>
+          					<label for="clubName" class="ui-hidden-accessible">Club Name:</label>
+          					<input type="text" name="clubName" id="clubName" placeholder="Club Name">
+          					<label for="email" class="ui-hidden-accessible">Email:</label>
+          					<input type="email" name="email" id="email" placeholder="Stuy.Edu Email">
+							<label for="name" class="ui-hidden-accessible">Name:</label>
+          					<input type="text" name="name" id="name" placeholder="Your Name">
+							<label for="room" class="ui-hidden-accessible">Room:</label>
+          					<select name="room" id="room" placeholder="Your Room">
+								<option value="notSelected" selected="selected">Room Number</option>
+								<option value="237">237</option>
+								<option value="337">337</option> 		  
+							</select>
+							<label for="date" class="ui-hidden-accessible">Reservation Date</label>
+							<input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
+							<input type="submit" data-inline="true" name="submit" value="Submit your Room Reservation">
+						</div>
+      				</form>
+    			</div>
 			</div>
     </div>
   </body>
