@@ -75,8 +75,8 @@ def login():
 
 #overall route to pass something to backend from front without reloading page
 @app.route("/get_functions")
-def get_functions():
-    return null;
+def get_res():
+    return TMP.getReservations();
 
 #overall route to change something backend without reloading page
 @app.route("/set_functions")
@@ -85,7 +85,7 @@ def set_res(club, email, name, room, date):
 
 
 set_res("club1", "derry@gmail.com","Derry","111","2016/11/11")
-print(TMP.getReservations())
+get_res();
 
 if __name__ == "__main__":
     app.secret_key= 'asidh19201o231l2k3j'
