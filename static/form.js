@@ -1,5 +1,5 @@
 $(function() {
-    $('.button').click(function() {
+    $('#theButton').click(function() {
         var ClubName = $('#clubName').val();
         var Gmail = $('#email').val();
 	var Name = $('#name').val();
