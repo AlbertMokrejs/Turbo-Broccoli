@@ -8,6 +8,7 @@ $(function() {
         $.ajax({
             url: '/set_functions',
 	    data: {club: ClubName, email: Gmail, name: Name, room: Room, date: Data},
+            type: 'POST',
             }
         });
     });
