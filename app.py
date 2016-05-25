@@ -74,12 +74,12 @@ def login():
 
 
 #overall route to pass something to backend from front without reloading page
-@app.route("/get_functions")
+@app.route("/get_functions", methods = ["GET","POST"])
 def get_res():
     return TMP.getReservations();
 
 #overall route to change something backend without reloading page
-@app.route("/set_functions")
+@app.route("/set_functions", methods = ["GET","POST"])
 def set_res(club, email, name, room, date):
     return TMP.addReservation(club, email, name, room, date, "3:35", "4;30");
 
