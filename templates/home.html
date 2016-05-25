@@ -89,7 +89,7 @@
 					<a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></button>
 				</div>
 				<div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
-      				<form method="post" action="demoform.asp">
+      				<form method="POST">
         				<div>
           					<h3>Make a Room Reservation</h3>
           					<label for="clubName" class="ui-hidden-accessible">Club Name:</label>
@@ -107,7 +107,7 @@
 						<label for="date" class="ui-hidden-accessible">Reservation Date</label>
 						<input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
 						<div id="Error"></div>
-						<input type="submit" data-inline="true" name="submit" value="Submit your Room Reservation">
+						<input type="submit" data-inline="true" name="submit" id="theButton" value="Submit your Room Reservation">
 					</div>
       				</form>
     			</div>
