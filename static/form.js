@@ -4,10 +4,10 @@ $(function() {
         var Gmail = $('#email').val();
 	var Name = $('#name').val();
 	var Room = $('#room').val();
-	var Date = $('#date').val();
+	var theDate = $('#date').val();
         $.ajax({
             url: '/set_functions',
-	    data: {club: ClubName, email: Gmail, name: Name, room: Room, date: Data},
+	    data: {club: ClubName, email: Gmail, name: Name, room: Room, date: theDate},
             type: 'POST',
             success: function(response){
             	if (response) {
