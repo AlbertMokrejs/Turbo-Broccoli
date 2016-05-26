@@ -10,12 +10,13 @@
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   </head>
   <body>
+	<script src="../static/calendar.js"></script>
 	<script src="../static/form.js"></script>
     <div id="container">
       <div id="header">
 				<h1>Club Management Calendar</h1>
-				<a href="/register" data-ajax="false" data-role="none" class="butttwo"><span>Sign Up</span></a>
-				<a href="/login" data-ajax="false" data-role="none" class="butttwo"><span>Log In</span></a>
+				<a href="register.html" class="butttwo"><span>Sign Up</span></a>
+				<a href="login.html" class="butttwo"><span>Log In</span></a>
       </div>
 	  <div id="content">
 	  	<div id="calendar">
@@ -112,6 +113,5 @@
     			</div>
 			</div>
     </div>
-        <script src="../static/calendar.js"></script>
   </body>
 </html>

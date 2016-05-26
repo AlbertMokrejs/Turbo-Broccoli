@@ -4,6 +4,10 @@ import marshal
 import json
 import time 
 
+#Inputs: String Version
+#checks version of the database. 
+#Archives databases if the version is wrong, and makes a new database if one doesn't exist. 
+#TableList sets the format.
 def checkGenerate(version):
    if not os.path.isfile("Calendar.db"):
       connect = sqlite3.connect("Calendar.db")
@@ -20,8 +24,12 @@ def checkGenerate(version):
             os.rename("Calendar.db","Archive.db") 
             checkGenerate(version) 
    except: 
-      pass 
-         
+      pass #Gonna Graduate. Seniors 2016!
+
+
+#Inputs: Bool doesReturn, string q
+#runs SQL code in q
+#if doesReturn, returns the output
 def runSQL( doesReturn, q):
    conn = sqlite3.connect("Calendar.db")
    c = conn.cursor()
@@ -34,6 +42,9 @@ def runSQL( doesReturn, q):
       c.execute(q)
       conn.commit()
 
+#inputs: all strings
+#makes a user account with these params if the email isn't taken
+#returns if an account was made
 def register(email, name, club, password):
    isTaken = len(findMatching("Users",{"email":email})) > 0
    if not isTaken:
@@ -41,13 +52,19 @@ def register(email, name, club, password):
       return True
    return False
    
+#inputs: all strings
+#checks if an account with this email and password exists
+#returns a bool
 def login(email,password):
    return findMatching("Users",{"email":email,"password":password})
+
 
 def addReservation(club,email,name,room,date,timeS,timeE):
    isTaken = False
    if weekDay(date.split("/")) == 1:
       isTaken = len(findMatching("Reservations",{"date":date, "room":room})) > 0
+   if weekDay(date.split("/")) == 0:
+      isTaken = True
    if not isTaken:
       pushReservation(club,email,name,room,date,timeS,timeE,0)
       return True
