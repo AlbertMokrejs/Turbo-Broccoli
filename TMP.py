@@ -4,6 +4,7 @@ import marshal
 import json
 import time 
 
+#
 def checkGenerate(version):
    if not os.path.isfile("Calendar.db"):
       connect = sqlite3.connect("Calendar.db")
