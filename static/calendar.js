@@ -45,7 +45,7 @@ function findMonth(num) {
 
 document.getElementById("mesa").caption.innerHTML = findMonth(monthNum);
 
-/*
+
 //find weekday of the first
 function weekDay(year, month, day) {
     var offset = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
@@ -72,40 +72,34 @@ function fillCal(month) {
 	    cal[x][y] = 0;
 	}
     }
-    //cal is a 5 row 7 column 2d array
-    //months with 31 days
-    if (monthNum == 0 || monthNum == 2 || monthNum == 4 || monthNum == 6 || monthNum == 7 || monthNum == 9 || monthNum == 11) { 
-	i = 0; //day ctr
-	while (i < 31) {
-	    dayOfWeek = weekDay(thisYear,monthNum,i);	 
-	    j = 0; //week ctr
-	    while (dayOfweek < 7) {
-		
-	    }
-	    i++;   
-	}
+    //cal is a 5 row 7 column 2d array    
+    first = weekDay(thisYear, month, 1);
+    i = 0; //day ctr
+    dayOfWeek = first;
+    if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {
+	limit = 31;
     }
-    //leap year
     else if (monthNum == 1 && thisYear%4 == 0) {
-	i = 0;
-	while (i < 29) {
-	    i++;
-	}
+	limit = 29;
     }
-    //regular february
     else if (monthNum == 1) {
-	i = 0;
-	while (i < 28) {
-	    i++;
-	}
+	limit = 28;
     }
-    //30 days
     else {
-	i = 0;
-	while (i < 30) {
-	    i++;
+	limit = 30;
+    }
+    while (i < limit) {
+	    j = 0;
+	    while (j < 5) {
+		while (dayOfweek < 7) {
+		    cal[j][dayOfWeek] = i+1;;
+		}
+		j++;
+		i++;
+	    }   
 	}
     }
-    return 0;
+    return cal;
 };
-*/
+
+console.log(cal);
