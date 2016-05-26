@@ -117,12 +117,14 @@ def insertValueJSON(a):
 
 def findMatching(name, arg):
    q = """SELECT * FROM %s""" % (name)
+   print arg
    if len(arg.keys()) > 0:
       q += """ WHERE """
       for x in arg.keys():
          q += "%s.%s = '%s' AND " % (name, x, arg[x])
       q = q[::-1][4::][::-1]
    q += ";"
+   print q
    result = runSQL(True, q)
    return [r for r in result]
    
