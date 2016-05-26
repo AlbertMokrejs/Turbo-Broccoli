@@ -26,14 +26,16 @@ $(function() {
 	console.log(Name);
 	console.log(Room);
 	console.log(theDate);
+	if (clubName != "" && Gmail != "" && Name != "" && Room != "" && theDate != ""){
 
-	$.get("/set_functions", {club: ClubName, email: Gmail, name: Name, room: Room, date: theDate}, function(data){
-	    console.log(data)
-	    if (data == "true"){
-		location.reload(true);
-	    }else{
-		document.getElementById('Error').innerHTML = '<span style="color: red;">Error: Requested room is not available at that date</span>';
-	    }
-	});
+	    $.get("/set_functions", {club: ClubName, email: Gmail, name: Name, room: Room, date: theDate}, function(data){
+		console.log(data)
+		if (data == "true"){
+		    location.reload(true);
+		}else{
+		    document.getElementById('Error').innerHTML = '<span style="color: red;">Error: Requested room is not available at that date</span>';
+		}
+	    });
+	}
     });
 });
