@@ -89,7 +89,7 @@
 					<a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></button>
 				</div>
 				<div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
-      				<form method="POST" action="set_functions">
+      				<form method="POST" action="/set_functions">
         				<div>
           					<h3>Make a Room Reservation</h3>
           					<label for="clubName" class="ui-hidden-accessible">Club Name:</label>
@@ -100,15 +100,15 @@
           					<input type="text" name="name" id="name" placeholder="Your Name">
 							<label for="room" class="ui-hidden-accessible">Room:</label>
           					<select name="room" id="room" placeholder="Your Room">
-							<option value="notSelected" selected="selected">Room Number</option>
-							<option value="237">237</option>
-							<option value="337">337</option> 		  
-						</select>
-						<label for="date" class="ui-hidden-accessible">Reservation Date</label>
-						<input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
-						<div id="Error"></div>
-						<input type="submit" data-inline="true" name="submit" id="theButton" value="Submit your Room Reservation">
-					</div>
+								<option value="notSelected" selected="selected">Room Number</option>
+								<option value="237">237</option>
+								<option value="337">337</option> 		  
+							</select>
+							<label for="date" class="ui-hidden-accessible">Reservation Date</label>
+							<input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
+							<div id="Error"></div>
+							<input type="submit" data-inline="true" name="submit" id="theButton" value="Submit your Room Reservation">
+						</div>
       				</form>
     			</div>
 			</div>

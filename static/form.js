@@ -2,12 +2,13 @@ $(function() {
     $('#theButton').click(function() {
         var ClubName = $('#clubName').val();
         var Gmail = $('#email').val();
-	var Name = $('#name').val();
-	var Room = $('#room').val();
-	var theDate = $('#date').val();
+	    var Name = $('#name').val();
+	    var Room = $('#room').val();
+	    var theDate = $('#date').val();
+        console.log($('form').serialize());
         $.ajax({
-            url: '/set_functions',
-	    data: {club: ClubName, email: Gmail, name: Name, room: Room, date: theDate},
+            url: "/set_functions",
+	        data: $('form').serialize(),
             type: 'POST',
             success: function(response){
             	if (response) {

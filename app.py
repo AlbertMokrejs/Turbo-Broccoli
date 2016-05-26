@@ -80,12 +80,19 @@ def get_res():
 
 #overall route to change something backend without reloading page
 @app.route("/set_functions", methods = ["GET","POST"])
-def set_res(club, email, name, room, date):
+def set_res():
+    club = request.form["clubName"];
+    email = request.form["email"];
+    name = request.form["name"];
+    room = request.form["room"];
+    date = request.form["date"];
+    print club;
+    print email;
+    print name;
+    print room;
+    print date;
     return TMP.addReservation(club, email, name, room, date, "3:35", "4;30");
 
-
-set_res("club1", "derry@gmail.com","Derry","111","2016/11/11")
-get_res();
 
 if __name__ == "__main__":
     app.secret_key= 'asidh19201o231l2k3j'
