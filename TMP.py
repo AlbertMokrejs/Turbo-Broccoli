@@ -25,6 +25,7 @@ def checkGenerate(version):
 def runSQL( doesReturn, q):
    conn = sqlite3.connect("Calendar.db")
    c = conn.cursor()
+   print q
    if doesReturn:
       result = c.execute(q)
       conn.commit()
@@ -57,9 +58,11 @@ def pushReservation(club,email,name,room,date,timeS,timeE,UID):
 
 def getReservations():
    res = findMatching("Reservations",{})
-   date=time.strftime("%Y/%m/%d").split("/")
+   date = time.strftime("%Y/%m/%d").split("/")
    final = []
+   print res
    for x in res:
+      print x
       if int(x[4].split("/")[0]) > int(date[0]):
          final.append(x)
       elif int(x[4].split("/")[0]) == int(date[0]):
@@ -72,6 +75,7 @@ def getReservations():
          counter = 0
       else:
          counter += 1
+   print final
    return final
    
 def checkDates(a,b):
