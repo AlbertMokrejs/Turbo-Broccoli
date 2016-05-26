@@ -145,5 +145,5 @@ def weekDay(a):
     dayOfWeek += aux / 4 - aux / 100 + (aux + 100) / 400     
     dayOfWeek += offset[month - 1] + (day - 1)               
     dayOfWeek %= 7
-    return dayOfWeek, week[dayOfWeek]
+    return week[dayOfWeek]
    
