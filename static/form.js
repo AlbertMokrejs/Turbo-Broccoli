@@ -33,7 +33,7 @@ $(function() {
 		if (data == "true"){
 		    location.reload(true);
 		}else{
-		    document.getElementById('Error').innerHTML = '<span style="color: red;">Error: Requested room is not available at that date</span>';
+		    document.getElementById('Error').innerHTML = '<span style="color: red;">Requested reservation is not available</span>';
 		}
 	    });
 	}
