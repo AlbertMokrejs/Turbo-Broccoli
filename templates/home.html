@@ -14,9 +14,13 @@
     <div id="container">
       <div id="header">
 				<h1>Club Management Calendar</h1>
-				<a href="/register" data-ajax="false" data-role="none" class="butttwo"><span>Sign Up</span></a>
-				<a href="/login" data-ajax="false" data-role="none" class="butttwo"><span>Log In</span></a>
-      </div>
+				{% if Username %}
+					<a href="/logout" data-ajax="false" data-role="none" class="butttwo"><span>Log In</span></a>
+				{% else %}
+					<a href="/register" data-ajax="false" data-role="none" class="butttwo"><span>Sign Up</span></a>
+					<a href="/login" data-ajax="false" data-role="none" class="butttwo"><span>Log In</span></a>
+				{% end if %}
+      </div>			
 	  <div id="content">
 	  	<div id="calendar">
 			<table align="center" id="mesa">
