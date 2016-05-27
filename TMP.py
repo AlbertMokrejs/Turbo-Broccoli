@@ -77,7 +77,7 @@ def getUIDMax():
    return len(findMatching("Reservations",{}))
    
 def delRes(UID):
-   runSQL(False, "DELETE FROM Reservations WHERE Reservations.UID=%s;" % (int(UID))
+   runSQL(False, "DELETE FROM Reservations WHERE Reservations.UID=%s;" % (int(UID)))
 
 def pushReservation(club,email,name,room,date,timeS,timeE,UID):
    insertValue("Reservations", [club,email,name,room,date,timeS,timeE,UID])
