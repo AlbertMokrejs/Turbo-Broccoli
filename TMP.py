@@ -4,6 +4,7 @@ import marshal
 import json
 import time 
 
+global UID
 #Inputs: String Version
 #checks version of the database. 
 #Archives databases if the version is wrong, and makes a new database if one doesn't exist. 
@@ -74,7 +75,9 @@ def getReservations(email):
    return findMatching("Reservations",{"email":email})
 
 def getUIDMax():
-   return len(findMatching("Reservations",{}))
+   global UID
+   UID += 1
+   return UID
    
 def delRes(UID):
    runSQL(False, "DELETE FROM Reservations WHERE Reservations.UID=%s;" % (int(UID)))
