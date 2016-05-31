@@ -70,16 +70,33 @@ def login():
                 print("log.2.1.1")
                 session["username"] = email
                 #return render_template("login.html", text = "yay")
-                return redirect('/', email=email)
+                return redirect(url_for('start'))
             else:
                 print("log.2.1.2")
                 return render_template("login.html", text = "Email/Password do not match")
     else:
         print("log.3")
         return render_template("login.html")
+
+#route to show person reservations
+@app.route("/reservations", methods = ["GET","POST"])
+def reservations():
+    if sessions != {}:
+        if request.method != "POST":
+            email = session['username']
+            reservations = TMP.getReservations(email);
+            return render_template("login.html", reservations = reservations)
+        else:
+            """
+            either delete here or in set functions
+            """
+    else:
+        return redirect(url_for('start'))
     
 
 
+
+    
 #overall route to pass something to backend from front without reloading page
 @app.route("/get_functions", methods = ["GET","POST"])
 def get_res():
