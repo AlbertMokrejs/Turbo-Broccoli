@@ -2,13 +2,20 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
 app = Flask(__name__)
-TMP.checkGenerate("0")
+TMP.checkGenerate("1")
 print("run?")
 
 #home route, subject to change what it loads
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def start():
-    return render_template("home.html")
+    print(session)
+    if  session != {}:
+        print("the court is in session")
+        email = session['username']
+        return render_template("home.html", email = email)
+    else:
+        print("the court is not in session")
+        return render_template("home.html")
 
 #route to register a user
 @app.route("/register", methods = ["GET","POST"])
@@ -63,7 +70,7 @@ def login():
                 print("log.2.1.1")
                 session["username"] = email
                 #return render_template("login.html", text = "yay")
-                return redirect(url_for('start', email=email))
+                return redirect('/', email=email)
             else:
                 print("log.2.1.2")
                 return render_template("login.html", text = "Email/Password do not match")
@@ -97,6 +104,8 @@ def set_res():
     else:
         return "false"
 
+
+    print(session)
 print(TMP.getReservations());
 
 if __name__ == "__main__":
