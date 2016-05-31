@@ -97,9 +97,9 @@ function fillCal(month) {
 		j++;
 		i++;
 	    }   
-	}
     }
+
     return cal;
 };
 
-console.log(cal);
+console.log(fillCal(monthNum));
