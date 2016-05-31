@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+  <title> Login </title>
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
+  <link rel="stylesheet" type="text/css" href="../static/forms.css">
+</head>
+<body>
+<div id="container">
+<div id="header">
+    <h1 align="center">Reservations</h1>
+    <br>
+</div>
+    <div id="content">
+    <ol>
+    {% for reservation in reservations %}
+    <li>Room {{reservation[3]}} on {{reservation[4]}}</li><form action="reservation/{{reservation[7]}}" method="POST"><button type="submit" value="Cancel"></form>  
+    {% endfor %}
+    </ol>
+    </div>
+</body>
+</html>
