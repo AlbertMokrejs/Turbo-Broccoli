@@ -71,7 +71,7 @@ def addReservation(club,email,name,room,date,timeS,timeE):
       return True
    return False
    
-def getReservations(email):
+def findReservations(email):
    return findMatching("Reservations",{"email":email})
 
 def getUIDMax():

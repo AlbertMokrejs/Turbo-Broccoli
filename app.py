@@ -11,8 +11,8 @@ def start():
     print(session)
     if  session != {}:
         print("the court is in session")
-        email = session['username']
-        return render_template("home.html", email = email)
+        Username = session['username']
+        return render_template("home.html", Username = Username)
     else:
         print("the court is not in session")
         return render_template("home.html")
@@ -81,10 +81,10 @@ def login():
 #route to show person reservations
 @app.route("/reservations", methods = ["GET","POST"])
 def reservations():
-    if sessions != {}:
+    if session != {}:
         if request.method != "POST":
             email = session['username']
-            reservations = TMP.getReservations(email);
+            reservations = TMP.findReservations(email);
             return render_template("login.html", reservations = reservations)
         else:
             """
@@ -94,7 +94,10 @@ def reservations():
         return redirect(url_for('start'))
     
 
-
+@app.route("/logout", methods = ["GET", "POST"])
+def logout():
+    session.clear()
+    return redirect(url_for('start'))
 
     
 #overall route to pass something to backend from front without reloading page

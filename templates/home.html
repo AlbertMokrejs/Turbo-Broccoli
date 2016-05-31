@@ -89,36 +89,36 @@
 						</tbody>
 					</table>
 				</div>
-				{% if Username %}
-					<div id="bookroom">
-						<a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></a>
-					</div>
-				<div data-role="popup" data-position-to="window" id="myPopup" class="ui-content" style="min-width:250px;">
-      				<form method="POST" action="/set_functions">
-        				<div>
-          					<h3>Make a Room Reservation</h3>
-          					<label for="clubName" class="ui-hidden-accessible">Club Name:</label>
-          					<input type="text" name="clubName" id="clubName" placeholder="Club Name">
-          					<label for="email" class="ui-hidden-accessible">Email:</label>
-          					<input type="email" name="email" id="email" placeholder="Stuy.Edu Email">
-							<label for="name" class="ui-hidden-accessible">Name:</label>
-          					<input type="text" name="name" id="name" placeholder="Your Name">
-							<label for="room" class="ui-hidden-accessible">Room:</label>
-          					<select name="room" id="room" placeholder="Your Room">
-								<option value="notSelected" selected="selected">Room Number</option>
-								<option value="237">237</option>
-								<option value="337">337</option> 		  
-							</select>
-							<label for="date" class="ui-hidden-accessible">Reservation Date</label>
-							<input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
-							<div id="Error"></div>
-							<button type="button" rel="external" data-disabled="true" data-inline="true" id="theButton" value="submit">Submit your Room Reservation</button>
-						</div>
-      				</form>
-    			</div>
-			{% endif %}
-			</div>
+		<div id="bookroom">
+		  {% if Username %}
+		  <a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></a>
+		  {% endif %}
+		</div>
+		<div data-role="popup" data-position-to="window" id="myPopup" class="ui-content" style="min-width:250px;">
+      		  <form method="POST" action="/set_functions">
+        	    <div>
+          	      <h3>Make a Room Reservation</h3>
+          	      <label for="clubName" class="ui-hidden-accessible">Club Name:</label>
+          	      <input type="text" name="clubName" id="clubName" placeholder="Club Name">
+          	      <label for="email" class="ui-hidden-accessible">Email:</label>
+          	      <input type="email" name="email" id="email" placeholder="Stuy.Edu Email">
+		      <label for="name" class="ui-hidden-accessible">Name:</label>
+          	      <input type="text" name="name" id="name" placeholder="Your Name">
+		      <label for="room" class="ui-hidden-accessible">Room:</label>
+          	      <select name="room" id="room" placeholder="Your Room">
+			<option value="notSelected" selected="selected">Room Number</option>
+			<option value="237">237</option>
+			<option value="337">337</option> 		  
+		      </select>
+		      <label for="date" class="ui-hidden-accessible">Reservation Date</label>
+		      <input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
+		      <div id="Error"></div>
+		      <button type="button" rel="external" data-disabled="true" data-inline="true" id="theButton" value="submit">Submit your Room Reservation</button>
+		    </div>
+      		  </form>
+    		</div>
+	  </div>
     </div>
-        <script src="../static/calendar.js"></script>
+    <script src="../static/calendar.js"></script>
   </body>
 </html>
