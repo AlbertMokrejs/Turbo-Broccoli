@@ -90,6 +90,8 @@ def reservations():
 @app.route("/reservations/<res_id>", methods = ["GET", "POST"])
 def delete_res(res_id):
     if session != {}:
+        res_id = int(float(res_id))
+        print(res_id)
         TMP.delRes(res_id)
         return redirect(url_for('reservations'))
     else:
