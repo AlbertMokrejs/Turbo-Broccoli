@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
 app = Flask(__name__)
 TMP.checkGenerate("1")
-print("run?")
 
 #home route, subject to change what it loads
 @app.route("/", methods = ["GET", "POST"])
@@ -20,62 +19,42 @@ def start():
 #route to register a user
 @app.route("/register", methods = ["GET","POST"])
 def register():
-    print("reg.1")
-    print(request.method)
     if request.method == "POST":
-        print("reg.2")
         if str(request.form["button"]) == "Register":
-            print("reg.2.1")
             email = str(request.form["uemail"])
             name = str(request.form["uname"])
             cname = str(request.form["clubname"])
             password1 = str(request.form["password1"])
             passwordcheck = str(request.form["passwordcheck"])
             if password1 == passwordcheck:
-                print("reg.2.1.1")
-                print(email +","+name+","+cname+","+password1+","+passwordcheck)
                 if (TMP.register(email,name,cname,password1)):
-                    print("reg.2.1.1.1")
                     session["username"] = email
                     #return render_template("register.html", text = "yay")
                 
                     return redirect(url_for('start'))
                 else:
-                    print("reg.2.1.1.2")
                     return render_template("register.html", text = "The email is already taken")
             else:
-                print("reg.2.1.2")
                 return render_template("register.html", text = "Passwords do not match")
         else:
-            print("reg.2.2")
             return redirect(url_for('start'))
     else:
-        print("reg.3")
         return render_template("register.html")
 
     
 #route to login, subject to change
 @app.route("/login", methods = ["GET","POST"])
 def login():
-    print("log.1")
     if request.method == "POST":
-        print("log.2")
         if str(request.form["button"]) == "Login":
-            print("log.2.1")
             email = str(request.form["umail"])
             password = str(request.form["password"])
-            print(email)
-            print(password)
             if(TMP.login(email,password)):
-                print("log.2.1.1")
                 session["username"] = email
-                #return render_template("login.html", text = "yay")
                 return redirect(url_for('start'))
             else:
-                print("log.2.1.2")
                 return render_template("login.html", text = "Email/Password do not match")
     else:
-        print("log.3")
         return render_template("login.html")
 
 #route to show person reservations
@@ -108,6 +87,7 @@ def logout():
 #overall route to pass something to backend from front without reloading page
 @app.route("/get_functions", methods = ["GET","POST"])
 def get_res():
+    print(TMP.getReservations());
     return TMP.getReservations();
 
 #overall route to change something backend without reloading page
@@ -118,20 +98,12 @@ def set_res():
     namet =request.args.get("name");
     roomt = request.args.get("room");
     datet = request.args.get("date");
-    print clubt;
-    print emailt;
-    print namet;
-    print roomt;
-    print datet;
     if(TMP.addReservation(clubt, emailt, namet, roomt, datet, "3:35", "4;30")):
         print(TMP.getReservations());
         return "true"
     else:
         return "false"
 
-
-    print(session)
-print(TMP.getReservations());
 
 if __name__ == "__main__":
     app.secret_key= 'asidh19201o231l2k3j'
