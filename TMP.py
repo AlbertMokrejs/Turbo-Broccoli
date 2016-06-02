@@ -29,7 +29,7 @@ def checkGenerate(version):
    except: 
       pass #Gonna Graduate. Seniors 2016!
    global UID
-   UID = getMax()
+   UID = getUIDMax()
 
 
 #Inputs: Bool doesReturn, string q
