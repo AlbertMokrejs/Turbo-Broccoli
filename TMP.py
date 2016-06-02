@@ -80,9 +80,10 @@ def findReservations(email):
 
 def getUIDMax():
    global UID
-   if not UID:
+   try:
+      UID += 1
+   except:
       UID = 0
-   UID += 1
    return UID
    
 def delRes(x):
