@@ -29,7 +29,12 @@
   * Need to determine schedule/goals
 2. (Sarah) 05/11/16: Made basic calendar css
 3. (Derry) 5/18/16: Path file started. Login and Register paths set up
-4. (Derry and Albert) 5/20/16: Login and Register both function. Now needs some css.
+4. (Derry, Albert) 5/20/16: Login and Register both function. Now needs some css.
+5. (Sarah) 5/23/16: Calender css updated, Calender js up
+6. (Derry, Albert, Shawn) 5/25/16: JS for login and register up, form js up, form currently being worked on
+7. (Shawn, Sarah) 5/26/16: Form working, calender updated
+8. (Shawn) 5/27/16: home.html janga up, working on redirects on the homepage
+9. (Derry, Albert, Shawn) 5/28/16: Specific reservations page added, route added, functions in backend added
 
 ## Contributors
 |**Profile Picture**|    **Name**    |    **Role**    |    **Github**    |
