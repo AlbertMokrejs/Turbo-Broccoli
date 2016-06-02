@@ -4,6 +4,8 @@ import marshal
 import json
 import time 
 
+
+
 global UID
 #Inputs: String Version
 #checks version of the database. 
@@ -26,6 +28,8 @@ def checkGenerate(version):
             checkGenerate(version) 
    except: 
       pass #Gonna Graduate. Seniors 2016!
+   global UID
+   UID = getMax()
 
 
 #Inputs: Bool doesReturn, string q
@@ -76,11 +80,13 @@ def findReservations(email):
 
 def getUIDMax():
    global UID
+   if not UID:
+      UID = 0
    UID += 1
    return UID
    
-def delRes(UID):
-   runSQL(False, "DELETE FROM Reservations WHERE Reservations.UID=%s;" % (int(UID)))
+def delRes(x):
+   runSQL(False, "DELETE FROM Reservations WHERE Reservations.UID=%s;" % (int(x)))
 
 def pushReservation(club,email,name,room,date,timeS,timeE,UID):
    insertValue("Reservations", [club,email,name,room,date,timeS,timeE,UID])
