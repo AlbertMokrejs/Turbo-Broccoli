@@ -13,7 +13,11 @@
     <div id="content">
     <ol>
     {% for reservation in reservations %}
-    <li>Room {{reservation[3]}} on {{reservation[4]}}</li><form action="reservations/{{reservation[7]}}" method="POST"><button type="submit" value="Cancel">Cancel</button</form>  
+    <li>
+      <form action="reservations/{{reservation[7]}}" method="POST">
+	<p>Room {{reservation[3]}} on {{reservation[4]}} <button type="submit" value="Cancel">Cancel</button></p>
+      </form>
+    </li>
     {% endfor %}
     </ol>
     </div>
