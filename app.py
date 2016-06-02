@@ -82,16 +82,19 @@ def login():
 @app.route("/reservations", methods = ["GET","POST"])
 def reservations():
     if session != {}:
-        if request.method != "POST":
             email = session['username']
-            reservations = TMP.findReservations(email);
-            return render_template("login.html", reservations = reservations)
-        else:
-            """
-            either delete here or in set functions
-            """
+            reservations = TMP.findReservations(email)
+            return render_template("reservations.html", reservations = reservations)
     else:
         return redirect(url_for('start'))
+@app.route("/reservations/<res_id>", methods = ["GET", "POST"])
+def delete_res(res_id):
+    if session != {}:
+        TMP.delRes(res_id)
+        return redirect(url_for('reservations'))
+    else:
+        return redirect(url_for('start'))
+
     
 
 @app.route("/logout", methods = ["GET", "POST"])
