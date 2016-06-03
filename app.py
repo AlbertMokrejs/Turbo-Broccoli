@@ -4,6 +4,8 @@ import TMP
 app = Flask(__name__)
 TMP.checkGenerate("1")
 
+app.secret_key= 'asidh19201o231l2k3j'
+
 #home route, subject to change what it loads
 @app.route("/", methods = ["GET", "POST"])
 def start():
@@ -106,6 +108,5 @@ def set_res():
 
 
 if __name__ == "__main__":
-    app.secret_key= 'asidh19201o231l2k3j'
     app.debug = True;
     app.run(host="0.0.0.0", port=8000)
