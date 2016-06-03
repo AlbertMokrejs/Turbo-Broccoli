@@ -46,4 +46,8 @@
 
 ## Deployment
 
+* Install Nginx
+* Install Flask
+* Use Nginx config to serve flask connections
+
 
