@@ -80,6 +80,12 @@ def register(email, name, club, password):
       return True
    return False
    
+def authen(email, name, club, password):
+   isTaken = len(findMatching("Users",{"email":email})) > 0
+   if not isTaken:
+      return True
+   return False   
+   
 #inputs: all strings
 #checks if an account with this email and password exists
 #returns a bool
