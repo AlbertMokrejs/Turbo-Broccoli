@@ -152,4 +152,51 @@ option {
 }
 p {
   color: white;
+  font-size: 24px;
+}
+li {
+  margin-top: 40px;
+}
+.buttthree {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  width: 100px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 0px 5px;
+  float: right;
+  font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.buttthree span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.buttthree span:after {
+  content: "\00BB";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.buttthree:hover {
+    color: white;
+}
+
+.buttthree:hover span {
+  padding-right: 10px;
+}
+
+.buttthree:hover span:after {
+  opacity: 1;
+  right: 0;
 }

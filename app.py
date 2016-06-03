@@ -4,6 +4,8 @@ import TMP
 app = Flask(__name__)
 TMP.checkGenerate("1")
 
+app.secret_key= 'asidh19201o231l2k3j'
+
 #home route, subject to change what it loads
 @app.route("/", methods = ["GET", "POST"])
 def start():
@@ -87,25 +89,24 @@ def logout():
 #overall route to pass something to backend from front without reloading page
 @app.route("/get_functions", methods = ["GET","POST"])
 def get_res():
-    print(TMP.getReservations());
-    return TMP.getReservations();
+    print(TMP.getReservations())
+    return TMP.getReservations()
 
 #overall route to change something backend without reloading page
 @app.route("/set_functions", methods = ["GET"])
 def set_res():
-    clubt = request.args.get("club");
-    emailt = request.args.get("email");
-    namet =request.args.get("name");
-    roomt = request.args.get("room");
-    datet = request.args.get("date");
+    clubt = request.args.get("club")
+    emailt = request.args.get("email")
+    namet =request.args.get("name")
+    roomt = int(float(request.args.get("room")))
+    datet = request.args.get("date")
     if(TMP.addReservation(clubt, emailt, namet, roomt, datet, "3:35", "4;30")):
-        print(TMP.getReservations());
+        print(TMP.getReservations())
         return "true"
     else:
         return "false"
 
 
 if __name__ == "__main__":
-    app.secret_key= 'asidh19201o231l2k3j'
-    app.debug = True;
+    app.debug = True
     app.run(host="0.0.0.0", port=8000)
