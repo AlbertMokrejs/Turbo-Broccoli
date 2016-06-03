@@ -30,6 +30,29 @@ def checkGenerate(version):
       pass #Gonna Graduate. Seniors 2016!
    global UID
    UID = getUIDMax()
+   
+def send_email( recipient, subject, body):
+    import smtplib
+
+    gmail_user = "stuyclubcalendar@gmail.com"
+    gmail_pwd = "clubsclubsclubs" #ORIGINAL CONTENT DO NOT STEAL (tm)
+    FROM = "StuyClubs"
+    TO = recipient
+    SUBJECT = subject
+    TEXT = body
+
+    # Prepare actual message
+    message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.ehlo()
+        server.starttls()
+        server.login(gmail_user, gmail_pwd)
+        server.sendmail(FROM, TO, message)
+        server.close()
+    except:
+        pass
 
 
 #Inputs: Bool doesReturn, string q
