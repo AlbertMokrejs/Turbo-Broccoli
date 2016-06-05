@@ -83,6 +83,16 @@ def register(email, name, club, password):
       return True
    return False
    
+def getVerS(email):
+   return findmatching("Users",{"email":email})[0][-2]
+   
+def getisVer(email):
+   return findmatching("Users",{"email":email})[0][-1]
+   
+def verifty(email,verS):
+   runSQL("UPDATE Users SET isVer = True WHERE email = '%s', verS = '%s';")
+   
+   
 def authen(email, name, club, password):
    isTaken = len(findMatching("Users",{"email":email})) > 0
    if not isTaken:
@@ -94,7 +104,6 @@ def authen(email, name, club, password):
 #returns a bool
 def login(email,password):
    return findMatching("Users",{"email":email,"password":password})
-
 
 def addReservation(club,email,name,room,date,timeS,timeE):
    isTaken = False
