@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
+import calender
 app = Flask(__name__)
 TMP.checkGenerate("1")
 app.secret_key= 'asidh19201o231l2k3j'
@@ -9,13 +10,14 @@ app.secret_key= 'asidh19201o231l2k3j'
 @app.route("/", methods = ["GET", "POST"])
 def start():
     print(session)
+    cal = calender.fillCal(now.month)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
-        return render_template("home.html", Username = Username)
+        return render_template("home.html", Username = Username, cal = cal)
     else:
         print("the court is not in session")
-        return render_template("home.html")
+        return render_template("home.html", cal = cal)
 
 
     
