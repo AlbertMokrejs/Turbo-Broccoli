@@ -14,7 +14,7 @@ def checkGenerate(version):
    if not os.path.isfile("Calendar.db"):
       connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
-      TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL","Club TEXT","verS TEXT", "isver BOOL"],["version","v TEXT"]]
+      TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL","Club TEXT","verS TEXT", "isver INTEGER"],["version","v TEXT"]]
       for q in TableList: 
          makeTable(q[0],q[1:]) 
       insertValue("version",[version])
@@ -54,7 +54,7 @@ def register(email, name, club, password):
       randstr = ""
       for x in xrange(15):
          randstr += "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"[random.randrange(len("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"))]
-      insertValue("Users",[name,email,password,base64.b64encode(marshal.dumps([])),0,club,randstr,False])
+      insertValue("Users",[name,email,password,base64.b64encode(marshal.dumps([])),0,club,randstr,0])
       return True
    return False
    
@@ -62,10 +62,10 @@ def getVerS(email):
    return findMatching("Users",{"email":email})[0][-2]
    
 def getisVer(email):
-   return findMatching("Users",{"email":email})[0][-1]
+   return bool(findMatching("Users",{"email":email})[0][-1])
    
 def verifty(email,verS):
-   runSQL(False, "UPDATE Users SET isVer = True WHERE email = '%s' AND verS = '%s';" % (email,verS))
+   runSQL(False, "UPDATE Users SET isVer = 1 WHERE email = '%s' AND verS = '%s';" % (email,verS))
    
    
 def authen(email, name, club, password):
