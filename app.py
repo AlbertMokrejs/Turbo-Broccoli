@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
-import calendar
 import datetime
 now = datetime.datetime.now()
 
@@ -55,11 +54,14 @@ def register():
     
 #route to authenticate a user
 @app.route("/authenticate")
-@app.route("/authenticate/<username>")
+@app.route("/authenticate/<username>", methods = ["GET", "POST"])
 def auth(username):
     if request.method == "POST":
-        if str(request.form["code"]) == TMP.getVerS(username):
-            TMP.verifty(username, str(request.form["code"]))
+        print("form submitted")
+        print(str(request.form["authenValue"]))
+        if str(request.form["authenValue"]) == TMP.getVerS(username):
+            print("checking validity")
+            TMP.verifty(username, str(request.form["authenValue"]))
             session["username"] = username
             return redirect(url_for('start'))
     else:
@@ -79,7 +81,7 @@ def login():
             else:
                 return render_template("login.html", text = "Email/Password do not match")
     else:
-        if TMP.getVer(str(request.form["umail"])):
+        if TMP.getisVer(str(request.form["umail"])):
             return render_template("login.html")
         else:
             return redirect("/authenticate/" + email + "")

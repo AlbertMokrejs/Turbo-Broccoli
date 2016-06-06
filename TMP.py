@@ -29,32 +29,6 @@ def checkGenerate(version):
       pass #Gonna Graduate. Seniors 2016!
    global UID
    UID = getUIDMax()
-   
-def send_email( recipient, subject, body):
-    import smtplib
-    print "Starting send"
-    gmail_user = "stuyclubcalendar@gmail.com"
-    gmail_pwd = "clubsclubsclubs" #ORIGINAL CONTENT DO NOT STEAL (tm)
-    FROM = "StuyClubs"
-    TO = recipient
-    SUBJECT = subject
-    TEXT = body
-
-    # Prepare actual message
-    message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-    try:
-       print "Trying to send"
-       server = smtplib.SMTP("smtp.gmail.com", 587)
-       server.ehlo()
-       server.starttls()
-       server.login(gmail_user, gmail_pwd)
-       server.sendmail(FROM, TO, message)
-       server.close()
-    except:
-       print "did not send"
-       pass
-
 
 #Inputs: Bool doesReturn, string q
 #runs SQL code in q
@@ -91,7 +65,7 @@ def getisVer(email):
    return findMatching("Users",{"email":email})[0][-1]
    
 def verifty(email,verS):
-   runSQL("UPDATE Users SET isVer = True WHERE email = '%s', verS = '%s';" % (email,verS))
+   runSQL(False, "UPDATE Users SET isVer = True WHERE email = '%s', verS = '%s';" % (email,verS))
    
    
 def authen(email, name, club, password):
@@ -208,3 +182,29 @@ def weekDay(a):
     dayOfWeek %= 7
     return week[dayOfWeek]
    
+def send_email( recipient, subject, body):
+    import smtplib
+    print "Starting send"
+    gmail_user = "stuyclubcalendar@gmail.com"
+    gmail_pwd = "clubsclubsclubs" #ORIGINAL CONTENT DO NOT STEAL (tm)
+    FROM = "StuyClubs"
+    TO = recipient
+    SUBJECT = subject
+    TEXT = body
+
+    # Prepare actual message
+    message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    print "Trying to send"
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    print "server"
+    server.ehlo()
+    print "ehlo?"
+    server.starttls()
+    print "server starting"
+    server.login(gmail_user, gmail_pwd)
+    print "logging in"
+    server.sendmail(FROM, TO, message)
+    print "sent da mail"
+    server.close()
+    print "close"
