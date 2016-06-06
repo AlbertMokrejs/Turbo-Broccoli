@@ -79,7 +79,7 @@ def register(email, name, club, password):
    if not isTaken:
       randstr = ""
       for x in xrange(15):
-         randstr += "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"[random.randint(len("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"))]
+         randstr += "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"[random.randrange(len("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"))]
       insertValue("Users",[name,email,password,base64.b64encode(marshal.dumps([])),0,club,randstr,False])
       return True
    return False
