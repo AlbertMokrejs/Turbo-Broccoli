@@ -90,7 +90,7 @@ def getisVer(email):
    return findmatching("Users",{"email":email})[0][-1]
    
 def verifty(email,verS):
-   runSQL("UPDATE Users SET isVer = True WHERE email = '%s', verS = '%s';" % (email,verS))
+   runSQL(False, "UPDATE Users SET isVer = True WHERE email = '%s' AND verS = '%s';" % (email,verS))
    
    
 def authen(email, name, club, password):
