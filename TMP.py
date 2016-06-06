@@ -3,8 +3,7 @@ import base64
 import marshal
 import json
 import time 
-
-
+import random 
 
 global UID
 #Inputs: String Version
@@ -33,7 +32,7 @@ def checkGenerate(version):
    
 def send_email( recipient, subject, body):
     import smtplib
-
+    print "Starting send"
     gmail_user = "stuyclubcalendar@gmail.com"
     gmail_pwd = "clubsclubsclubs" #ORIGINAL CONTENT DO NOT STEAL (tm)
     FROM = "StuyClubs"
@@ -45,14 +44,16 @@ def send_email( recipient, subject, body):
     message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
     """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
     try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.ehlo()
-        server.starttls()
-        server.login(gmail_user, gmail_pwd)
-        server.sendmail(FROM, TO, message)
-        server.close()
+       print "Trying to send"
+       server = smtplib.SMTP("smtp.gmail.com", 587)
+       server.ehlo()
+       server.starttls()
+       server.login(gmail_user, gmail_pwd)
+       server.sendmail(FROM, TO, message)
+       server.close()
     except:
-        pass
+       print "did not send"
+       pass
 
 
 #Inputs: Bool doesReturn, string q
@@ -84,10 +85,10 @@ def register(email, name, club, password):
    return False
    
 def getVerS(email):
-   return findmatching("Users",{"email":email})[0][-2]
+   return findMatching("Users",{"email":email})[0][-2]
    
 def getisVer(email):
-   return findmatching("Users",{"email":email})[0][-1]
+   return findMatching("Users",{"email":email})[0][-1]
    
 def verifty(email,verS):
    runSQL("UPDATE Users SET isVer = True WHERE email = '%s', verS = '%s';" % (email,verS))

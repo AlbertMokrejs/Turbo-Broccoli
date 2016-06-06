@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
-import calender
+import calendar
+import datetime
+now = datetime.datetime.now()
+
 app = Flask(__name__)
 TMP.checkGenerate("1")
 app.secret_key= 'asidh19201o231l2k3j'
@@ -10,7 +13,7 @@ app.secret_key= 'asidh19201o231l2k3j'
 @app.route("/", methods = ["GET", "POST"])
 def start():
     print(session)
-    cal = calender.fillCal(now.month)
+    cal = calendar.fillCal(now.month)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
@@ -33,17 +36,20 @@ def register():
             passwordcheck = str(request.form["passwordcheck"])
             if password1 == passwordcheck:
                 if (TMP.register(email,name,cname,password1)):
-                    TMP.send_email(email, "TBD", "TBD") #send the auth email here
+                    print("1")
+                    TMP.send_email(email, "Stuyvesant Club Calender Authentication", "Hello, " + name + "thank you for signing up to Stuyvesant's new club room reservation system.\nIf you could enter the following code to the authentication page, then you'll be all set to use the system!\nCode: " + TMP.getVerS(email)) #send the auth email here
                     return redirect("/authenticate/" + email + "")
                 else:
+                    print("email taken")
                     return render_template("register.html", text = "The email is already taken")
             else:
+                print("passwords do not match")
                 return render_template("register.html", text = "Passwords do not match")
         else:
             return redirect(url_for('start'))
     else:
         return render_template("register.html")
-
+    
     
 
     
@@ -52,12 +58,12 @@ def register():
 @app.route("/authenticate/<username>")
 def auth(username):
     if request.method == "POST":
-        if str(request.form["code"]) == TMP.get_auth_code_function:
-            TMP.change_auth_status_function
+        if str(request.form["code"]) == TMP.getVerS(username):
+            TMP.verifty(username, str(request.form["code"]))
             session["username"] = username
             return redirect(url_for('start'))
     else:
-        return render_template("authentication.html" username = username)
+        return render_template("authentication.html", username = username)
     
             
 #route to login, subject to change
@@ -73,7 +79,7 @@ def login():
             else:
                 return render_template("login.html", text = "Email/Password do not match")
     else:
-        if TMP.check_auth_status_function:
+        if TMP.getVer(str(request.form["umail"])):
             return render_template("login.html")
         else:
             return redirect("/authenticate/" + email + "")
