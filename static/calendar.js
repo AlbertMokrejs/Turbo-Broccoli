@@ -2,7 +2,7 @@
 var todayNum = d.getDate();
 var monthNum = d.getMonth();
 var thisYear = d.getYear();
-
+/*
 
 function findMonth(num) {
     console.log(num);
@@ -44,7 +44,7 @@ function findMonth(num) {
     }
 };
 
-/*
+
 
 //find weekday of the first
 function weekDay(year, month, day) {

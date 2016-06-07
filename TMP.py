@@ -3,8 +3,7 @@ import base64
 import marshal
 import json
 import time 
-
-
+import random 
 
 global UID
 #Inputs: String Version
@@ -15,7 +14,7 @@ def checkGenerate(version):
    if not os.path.isfile("Calendar.db"):
       connect = sqlite3.connect("Calendar.db")
       curs = connect.cursor()
-      TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL","Club TEXT"],["version","v TEXT"]]
+      TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL","Club TEXT","verS TEXT", "isver INTEGER"],["version","v TEXT"]]
       for q in TableList: 
          makeTable(q[0],q[1:]) 
       insertValue("version",[version])
@@ -30,30 +29,6 @@ def checkGenerate(version):
       pass #Gonna Graduate. Seniors 2016!
    global UID
    UID = getUIDMax()
-   
-def send_email( recipient, subject, body):
-    import smtplib
-
-    gmail_user = "stuyclubcalendar@gmail.com"
-    gmail_pwd = "clubsclubsclubs" #ORIGINAL CONTENT DO NOT STEAL (tm)
-    FROM = "StuyClubs"
-    TO = recipient
-    SUBJECT = subject
-    TEXT = body
-
-    # Prepare actual message
-    message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.ehlo()
-        server.starttls()
-        server.login(gmail_user, gmail_pwd)
-        server.sendmail(FROM, TO, message)
-        server.close()
-    except:
-        pass
-
 
 #Inputs: Bool doesReturn, string q
 #runs SQL code in q
@@ -76,16 +51,34 @@ def runSQL( doesReturn, q):
 def register(email, name, club, password):
    isTaken = len(findMatching("Users",{"email":email})) > 0
    if not isTaken:
-      insertValue("Users",[name,email,password,base64.b64encode(marshal.dumps([])),0,club])
+      randstr = ""
+      for x in xrange(15):
+         randstr += "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"[random.randrange(len("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"))]
+      insertValue("Users",[name,email,password,base64.b64encode(marshal.dumps([])),0,club,randstr,0])
       return True
    return False
+   
+def getVerS(email):
+   return findMatching("Users",{"email":email})[0][-2]
+   
+def getisVer(email):
+   return bool(findMatching("Users",{"email":email})[0][-1])
+   
+def verifty(email,verS):
+   runSQL(False, "UPDATE Users SET isVer = 1 WHERE email = '%s' AND verS = '%s';" % (email,verS))
+   
+   
+def authen(email, name, club, password):
+   isTaken = len(findMatching("Users",{"email":email})) > 0
+   if not isTaken:
+      return True
+   return False   
    
 #inputs: all strings
 #checks if an account with this email and password exists
 #returns a bool
 def login(email,password):
    return findMatching("Users",{"email":email,"password":password})
-
 
 def addReservation(club,email,name,room,date,timeS,timeE):
    isTaken = False
@@ -189,3 +182,29 @@ def weekDay(a):
     dayOfWeek %= 7
     return week[dayOfWeek]
    
+def send_email( recipient, subject, body):
+    import smtplib
+    print "Starting send"
+    gmail_user = "stuyclubcalendar@gmail.com"
+    gmail_pwd = "clubsclubsclubs" #ORIGINAL CONTENT DO NOT STEAL (tm)
+    FROM = "StuyClubs"
+    TO = recipient
+    SUBJECT = subject
+    TEXT = body
+
+    # Prepare actual message
+    message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    print "Trying to send"
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    print "server"
+    server.ehlo()
+    print "ehlo?"
+    server.starttls()
+    print "server starting"
+    server.login(gmail_user, gmail_pwd)
+    print "logging in"
+    server.sendmail(FROM, TO, message)
+    print "sent da mail"
+    server.close()
+    print "close"
