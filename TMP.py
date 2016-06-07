@@ -18,7 +18,6 @@ def checkGenerate(version):
       for q in TableList: 
          makeTable(q[0],q[1:]) 
       insertValue("version",[version])
-      print "VERSION UP TO DATE." 
    try: 
       result = runSQL(True, """SELECT * FROM version;""") 
       for r in result: 
@@ -36,7 +35,6 @@ def checkGenerate(version):
 def runSQL( doesReturn, q):
    conn = sqlite3.connect("Calendar.db")
    c = conn.cursor()
-   print q
    if doesReturn:
       result = c.execute(q)
       conn.commit()
@@ -112,9 +110,7 @@ def getReservations():
    res = findMatching("Reservations",{})
    date = time.strftime("%Y/%m/%d").split("/")
    final = []
-   print res
    for x in res:
-      print x
       if int(x[4].split("/")[0]) > int(date[0]):
          final.append(x)
       elif int(x[4].split("/")[0]) == int(date[0]):
@@ -127,7 +123,6 @@ def getReservations():
          counter = 0
       else:
          counter += 1
-   print final
    return final
    
 def checkDates(a,b):
@@ -152,14 +147,12 @@ def insertValueJSON(a):
 
 def findMatching(name, arg):
    q = """SELECT * FROM %s""" % (name)
-   print arg
    if len(arg.keys()) > 0:
       q += """ WHERE """
       for x in arg.keys():
          q += "%s.%s = '%s' AND " % (name, x, arg[x])
       q = q[::-1][4::][::-1]
    q += ";"
-   print q
    result = runSQL(True, q)
    return [r for r in result]
    
@@ -195,16 +188,9 @@ def send_email( recipient, subject, body):
     # Prepare actual message
     message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
     """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-    print "Trying to send"
     server = smtplib.SMTP("smtp.gmail.com", 587)
-    print "server"
     server.ehlo()
-    print "ehlo?"
     server.starttls()
-    print "server starting"
     server.login(gmail_user, gmail_pwd)
-    print "logging in"
     server.sendmail(FROM, TO, message)
-    print "sent da mail"
     server.close()
-    print "close"
