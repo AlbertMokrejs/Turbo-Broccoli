@@ -21,7 +21,7 @@ def start():
     if  session != {}:
         print("the court is in session")
         Username = session['username']
-        return render_template("home.html", cal = cal)
+        return render_template("home.html", cal = month1)
     else:
         print("the court is not in session")
         return render_template("home.html", cal = month1)
