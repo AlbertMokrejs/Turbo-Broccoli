@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
 import datetime
+import cal
 now = datetime.datetime.now()
 
 app = Flask(__name__)
@@ -12,14 +13,14 @@ app.secret_key= 'asidh19201o231l2k3j'
 @app.route("/", methods = ["GET", "POST"])
 def start():
     print(session)
-    cal = calendar.fillCal(now.month)
+    calen = cal.fillCal(now.month)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
         return render_template("home.html", Username = Username, cal = cal)
     else:
         print("the court is not in session")
-        return render_template("home.html", cal = cal)
+        return render_template("home.html", calen = calen)
 
 
     
@@ -36,7 +37,7 @@ def register():
             if password1 == passwordcheck:
                 if (TMP.register(email,name,cname,password1)):
                     print("1")
-                    TMP.send_email(email, "Stuyvesant Club Calender Authentication", "Hello, " + name + "thank you for signing up to Stuyvesant's new club room reservation system.\nIf you could enter the following code to the authentication page, then you'll be all set to use the system!\nCode: " + TMP.getVerS(email)) #send the auth email here
+                    TMP.send_email(email, "Stuyvesant Club Calender Authentication", "Hello, " + name + "\nThank you for signing up to Stuyvesant's new club room reservation system.\nIf you could enter the following code to the authentication page, then you'll be all set to use the system!\nCode: " + TMP.getVerS(email)) #send the auth email here
                     return redirect("/authenticate/" + email + "")
                 else:
                     print("email taken")
