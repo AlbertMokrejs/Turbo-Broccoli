@@ -49,12 +49,19 @@
 * run the following code:
 
 > sudo apt-get update
+
 > sudo apt-get install python-pip python-dev nginx
+
 > sudo pip install virtualenv
+
 > mkdir ~/stuylendar
+
 > cd ~/stuylendar
+
 > virtualenv stuylendarenv
+
 > source stuylendarenv/bin/activate
+
 > pip install uwsgi flask
 
 * open stuylendar.conf
@@ -69,6 +76,7 @@
 * run the following code:
 
 > sudo ln -s /etc/nginx/sites-available/stuylendar /etc/nginx/sites-enabled
+
 > sudo service nginx restart
 
 This guide and all files are based on [This guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04)
