@@ -46,8 +46,29 @@
 
 ## Deployment
 
-* Install Nginx
-* Install Flask
-* Use Nginx config to serve flask connections
+* run the following code:
 
+> sudo apt-get update
+> sudo apt-get install python-pip python-dev nginx
+> sudo pip install virtualenv
+> mkdir ~/stuylendar
+> cd ~/stuylendar
+> virtualenv stuylendarenv
+> source stuylendarenv/bin/activate
+> pip install uwsgi flask
 
+* open stuylendar.conf
+ * replace all instances of "<user>" within the file so that "/home/<user>/myproject/stuylendarenv/bin" points to the app's virtual enviroment
+ * move the file to "/etc/init/stuylendar.conf" (this enables auto-startup)
+
+* open stuylendar (the file with no file extension)
+ * replace "<IP/Domain>" with the website's Domain
+ * replace "<user>" so that "/home/<user>/stuylendar/stuylendar.sock" points to the project's socket file
+ * move the file to "/etc/nginx/sites-available/stuylendar"
+
+* run the following code:
+
+> sudo ln -s /etc/nginx/sites-available/stuylendar /etc/nginx/sites-enabled
+> sudo service nginx restart
+
+This guide and all files are based on [This guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04)
