@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
 import datetime
-import cale
+import calendar
 now = datetime.datetime.now()
 
 app = Flask(__name__)
@@ -9,18 +9,22 @@ TMP.checkGenerate("1")
 app.secret_key= 'asidh19201o231l2k3j'
 
 
+month1 = {}
+month2 = {}
+month3 = {}
+
 #home route, subject to change what it loads
 @app.route("/", methods = ["GET", "POST"])
 def start():
+    session["username"] = "mli6@stuy.edu"
     print(session)
-    cal = cale.tableHTML(now.year,now.month)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
-        return render_template("home.html", Username = Username, cal = cal)
+        return render_template("home.html", cal = cal)
     else:
         print("the court is not in session")
-        return render_template("home.html", calen = calen)
+        return render_template("home.html", cal = month1)
 
 
     
@@ -143,7 +147,65 @@ def set_res():
         return "false"
 
 
+TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "355", "2016/06/09", "3:35", "5:00")
+TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "375", "2016/06/08", "3:35", "5:00") 
+TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "515", "2016/10/08", "3:35", "5:00")
+TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "555", "2017/06/08", "3:35", "5:00")
+TMP.addReservation("NotDerry's Club", "mli8@stuy.edu", "NotDerry", "755", "2016/06/09", "3:35", "5:00")
 
+def generate_cal():
+    hold_1 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month)
+    hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month + 1)
+    hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month + 2)
+    hold_res = parsed_res()
+    counter = 0
+    for x in range(5):
+        for y in range(7):
+            list1 = [[hold_1[x][y]]]
+            list2 = [[hold_2[x][y]]]
+            list3 = [[hold_3[x][y]]]
+            for z in hold_res:
+                if z[2] == counter:
+                    if z[3] == now.month:
+                        list1.append([z[1],z[0]])
+                    elif z[3] == now.month + 1:
+                        list2.append([z[1],z[0]])
+                    elif z[3] == now.month + 2:
+                        list3.append([z[1],z[0]])
+            month1[counter] = list1
+            month2[counter] = list2
+            month3[counter] = list3
+            counter = counter + 1
+
+    
+def parsed_res():
+    list_len = len(TMP.getReservations())
+    res_list = [[0 for x in range(5)] for y in range(list_len)]
+    check = 0
+    for x in TMP.getReservations():
+        hold_club = x[0]
+        hold_room = x[3]
+        hold_date = x[4]
+        hold_splits = hold_date.split("/")
+        res_list[check][0] = hold_club
+        res_list[check][1] = hold_room
+        res_list[check][2] = int(hold_splits[2])
+        res_list[check][3] = int(hold_splits[1])
+        res_list[check][4] = hold_splits[0]
+        check = check + 1
+
+    for x in res_list:
+        if x[3] > (now.month + 3):
+            res_list.remove(x)
+        elif x[4] > now.year:
+            res_list.remove(x)
+    return res_list
+
+generate_cal()
+
+print(month1)
+
+      
     
 if __name__ == "__main__":
     app.debug = True
