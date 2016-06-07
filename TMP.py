@@ -177,7 +177,6 @@ def weekDay(a):
    
 def send_email( recipient, subject, body):
     import smtplib
-    print "Starting send"
     gmail_user = "stuyclubcalendar@gmail.com"
     gmail_pwd = "clubsclubsclubs" #ORIGINAL CONTENT DO NOT STEAL (tm)
     FROM = "StuyClubs"
