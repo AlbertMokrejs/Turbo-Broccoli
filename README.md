@@ -65,12 +65,12 @@
 > pip install uwsgi flask
 
 * open stuylendar.conf
- * replace all instances of "<user>" within the file so that "/home/<user>/myproject/stuylendarenv/bin" points to the app's virtual enviroment
+ * replace all instances of "\<user\>" within the file so that "/home/\<user\>/myproject/stuylendarenv/bin" points to the app's virtual enviroment
  * move the file to "/etc/init/stuylendar.conf" (this enables auto-startup)
 
 * open stuylendar (the file with no file extension)
- * replace "<IP/Domain>" with the website's Domain
- * replace "<user>" so that "/home/<user>/stuylendar/stuylendar.sock" points to the project's socket file
+ * replace "\<IP/Domain\>" with the website's Domain
+ * replace "\<user\>" so that "/home/\<user\>/stuylendar/stuylendar.sock" points to the project's socket file
  * move the file to "/etc/nginx/sites-available/stuylendar"
 
 * run the following code:
