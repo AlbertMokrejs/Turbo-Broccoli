@@ -13,7 +13,7 @@ app.secret_key= 'asidh19201o231l2k3j'
 @app.route("/", methods = ["GET", "POST"])
 def start():
     print(session)
-    cal = cale.fillCal(now.month)
+    cal = cale.tableHTML(now.year,now.month)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
