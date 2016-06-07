@@ -10,14 +10,18 @@
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   </head>
   <body>
-	<script src="../static/calendar.js"></script>
 	<script src="../static/form.js"></script>
     <div id="container">
       <div id="header">
 				<h1>Club Management Calendar</h1>
-				<a href="register.html" class="butttwo"><span>Sign Up</span></a>
-				<a href="login.html" class="butttwo"><span>Log In</span></a>
-      </div>
+				{% if Username %}
+					<a href="/logout" data-ajax="false" data-role="none" class="butttwo"><span>Log out</span></a>
+					<a href="/reservations" data-ajax="false" data-role="none" class="butttwo"><span>Reservations</span></a>
+				{% else %}
+					<a href="/register" data-ajax="false" data-role="none" class="butttwo"><span>Sign Up</span></a>
+					<a href="/login" data-ajax="false" data-role="none" class="butttwo"><span>Log In</span></a>
+				{% endif %}
+      </div>			
 	  <div id="content">
 	  	<div id="calendar">
 			<table align="center" id="mesa">
@@ -35,83 +39,107 @@
 								<th>Fri</th>
 								<th>Sat</th>
 							</tr>
-								</thead>
-								<tbody>
+						</thead>
+						<tbody>
+						  <!--
+						      @SHAWN: REPLACE ALL THIS COMMENT W A JINJA TAG
+						      I MADE A PYTHON FILE THAT RETURNS THE TABLE ROWS AND CELLS WITH THE CORRECT DAYS IN THEM
+						      IT IS FORMATTED AS JUST A PLAIN STRING
+						      <tr>
+								<td><div class="day"></div>1</td>
+								<td><div class="day"></div>2</td>
+								<td><div class="day"></div>3</td>
+								<td><div class="day"></div>4</td>
+								<td><div class="day"></div>5</td>
+								<td><div class="day"></div>6</td>
+								<td><div class="day"></div>7</td>
+							</tr>
 							<tr>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
+								<td><div class="day"></div>8</td>
+								<td><div class="day"></div>9</td>
+								<td><div class="day"></div>10</td>
+								<td><div class="day"></div>11</td>
+								<td><div class="day"></div>12</td>
+								<td><div class="day"></div>13</td>
+								<td><div class="day"></div>14</td>
+							</tr>
+							<tr>
+								<td><div class="day"></div>15</td>
+								<td><div class="day"></div>16</td>
+								<td><div class="day"></div>17</td>
+								<td><div class="day"></div>18</td>
+								<td><div class="day"></div>19</td>
+								<td><div class="day"></div>20</td>
+								<td><div class="day"></div>21</td>
+							</tr>
+							<tr>
+								<td><div class="day"></div>22</td>
+								<td><div class="day"></div>23</td>
+								<td><div class="day"></div>24</td>
+								<td><div class="day"></div>25</td>
+								<td><div class="day"></div>26</td>
+								<td><div class="day"></div>27</td>
+								<td><div class="day"></div>28</td>
+							</tr>
+							<tr>
+								<td><div class="day"></div>29</td>
+								<td><div class="day"></div>30</td>
+								<td><div class="day"></div>31</td>
 								<td><div class="day"></div></td>
 								<td><div class="day"></div></td>
 								<td><div class="day"></div></td>
 								<td><div class="day"></div></td>
 							</tr>
-							<tr>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-							</tr>
-							<tr>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-							</tr>
-							<tr>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-							</tr>
-							<tr>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-							</tr>
+						-->
 						</tbody>
 					</table>
 				</div>
-				<div id="bookroom">
-					<a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></a>
-				</div>
-				<div data-role="popup" data-position-to="window" id="myPopup" class="ui-content" style="min-width:250px;">
-      				<form method="POST" action="/set_functions">
-        				<div>
-          					<h3>Make a Room Reservation</h3>
-          					<label for="clubName" class="ui-hidden-accessible">Club Name:</label>
-          					<input type="text" name="clubName" id="clubName" placeholder="Club Name">
-          					<label for="email" class="ui-hidden-accessible">Email:</label>
-          					<input type="email" name="email" id="email" placeholder="Stuy.Edu Email">
-							<label for="name" class="ui-hidden-accessible">Name:</label>
-          					<input type="text" name="name" id="name" placeholder="Your Name">
-							<label for="room" class="ui-hidden-accessible">Room:</label>
-          					<select name="room" id="room" placeholder="Your Room">
-								<option value="notSelected" selected="selected">Room Number</option>
-								<option value="237">237</option>
-								<option value="337">337</option> 		  
-							</select>
-							<label for="date" class="ui-hidden-accessible">Reservation Date</label>
-							<input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
-							<div id="Error"></div>
-							<button type="button" rel="external" data-disabled="true" data-inline="true" id="theButton" value="submit">Submit your Room Reservation</button>
-						</div>
-      				</form>
-    			</div>
-			</div>
+		<div id="bookroom">
+		  {% if Username %}
+		  <a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></a>
+		  {% endif %}
+		</div>
+		<div data-role="popup" data-position-to="window" id="myPopup" class="ui-content" style="min-width:250px;">
+      		  <form method="POST" action="/set_functions">
+        	    <div>
+          	      <h3>Make a Room Reservation</h3>
+          	      <label for="clubName" class="ui-hidden-accessible">Club Name:</label>
+          	      <input type="text" name="clubName" id="clubName" placeholder="Club Name">
+          	      <label for="email" class="ui-hidden-accessible">Email:</label>
+          	      <input type="email" name="email" id="email" placeholder="Stuy.Edu Email">
+		      <label for="name" class="ui-hidden-accessible">Name:</label>
+          	      <input type="text" name="name" id="name" placeholder="Your Name">
+		      <label for="room" class="ui-hidden-accessible">Room:</label>
+          	      <select name="room" id="room" placeholder="Your Room">
+			<option value="notSelected" selected="selected">Room Number</option>
+			<option value="229"><p>229</p></option>
+			<option value="231">231</option> 
+			<option value="303">303</option>
+			<option value="313">313</option>
+			<option value="315">315</option>
+			<option value="327">327</option>
+			<option value="329">329</option>
+			<option value="333">333</option>
+			<option value="335">335</option>
+			<option value="337">339</option>
+			<option value="339">339</option>
+			<option value="403">403</option>
+			<option value="405">405</option> 
+			<option value="407">407</option>
+			<option value="427">427</option>
+			<option value="431">431</option>
+			<option value="437">437</option>
+
+		      </select>
+		      <label for="date" class="ui-hidden-accessible">Reservation Date</label>
+		      <input type="text" name="date" id="date" placeholder="YYYY/MM/DD (Reservation date)">
+		      <div id="Error"></div>
+		      <button type="button" rel="external" data-disabled="true" data-inline="true" id="theButton" value="submit">Submit your Room Reservation</button>
+		    </div>
+      		  </form>
+    		</div>
+	  </div>
     </div>
+    <script src="../static/calendar.js"></script>
   </body>
 </html>
