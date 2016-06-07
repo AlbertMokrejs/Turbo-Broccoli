@@ -1,4 +1,4 @@
-var d = new Date();
+/*var d = new Date();
 var todayNum = d.getDate();
 var monthNum = d.getMonth();
 var thisYear = d.getYear();
@@ -68,8 +68,6 @@ function weekDay(year, month, day) {
 
 console.log("June 1st is :" +weekDay(thisYear,monthNum, 1));
 
-*/
-
 function fillCal(month) {
     //only works for 2016 right now
     console.log("start fillcall");
@@ -83,7 +81,6 @@ function fillCal(month) {
 	    console.log("start of 2d array, level 2");
 	    cal[x][y] = 0;
 	}
-	*/
     }
     //cal is a 5 row 7 column 2d array    
     first = 3;
@@ -122,3 +119,4 @@ function fillCal(month) {
 fillCal(6);
 document.getElementById("mesa").caption.innerHTML = findMonth(monthNum);
 
+*/
