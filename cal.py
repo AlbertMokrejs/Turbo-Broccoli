@@ -6,7 +6,7 @@ def fillCal(month):
         for n in range(7):
             cal[x].append([])
     first = 3 #this would be the weekday calculator function
-    i = 0
+    i = 1
     j = 0
     dayOfWeek = first
     if month == 0 or month == 2 or month == 4 or month == 6 or month == 7 or month == 9 or month == 11:
@@ -17,17 +17,19 @@ def fillCal(month):
         limit = 28
     else:
         limit = 30
-    while i < limit-1:
-        while j < 5:
-            while dayOfWeek < 7:
+    while j < 5:
+        print "\n\nnew week\n"
+        while dayOfWeek < 7:                
+            if i > limit + 1:
+                return cal
+            else:
                 print("i="+str(i))
-                print("j="+str(j))
                 print( "day="+str(dayOfWeek))
-                cal[j][dayOfWeek] = i+1
+                cal[j][dayOfWeek] = i
                 dayOfWeek += 1
                 i += 1
-            j += 1
-            dayOfWeek = 0
+        j += 1
+        dayOfWeek = 0
     return cal
 
 print(fillCal(5))
