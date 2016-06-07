@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
 import datetime
-import cal
+import cale
 now = datetime.datetime.now()
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ app.secret_key= 'asidh19201o231l2k3j'
 @app.route("/", methods = ["GET", "POST"])
 def start():
     print(session)
-    calen = cal.fillCal(now.month)
+    cal = cale.fillCal(now.month)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
