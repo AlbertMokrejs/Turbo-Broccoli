@@ -1,3 +1,17 @@
+
+from datetime import date
+
+def firstDay(d):
+    #code to get number
+    ret = d
+    if ret <6:
+        ret += 1
+        return ret
+    else:
+        return 0
+
+    
+
 def fillCal(month):
     ret = ""
     cal = []
@@ -18,13 +32,13 @@ def fillCal(month):
     else:
         limit = 30
     while j < 5:
-        print "\n\nnew week\n"
+        #print "\n\nnew week\n"
         while dayOfWeek < 7:                
             if i > limit + 1:
                 return cal
             else:
-                print("i="+str(i))
-                print( "day="+str(dayOfWeek))
+                #print("i="+str(i))
+                #print( "day="+str(dayOfWeek))
                 cal[j][dayOfWeek] = i
                 dayOfWeek += 1
                 i += 1
@@ -33,3 +47,5 @@ def fillCal(month):
     return cal
 
 print(fillCal(5))
+print(firstDay(0))
+print(firstDay(6))
