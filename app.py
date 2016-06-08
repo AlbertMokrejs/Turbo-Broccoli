@@ -12,19 +12,23 @@ app.secret_key= 'asidh19201o231l2k3j'
 month1 = {}
 month2 = {}
 month3 = {}
+current_month = 0
+
 
 #home route, subject to change what it loads
 @app.route("/", methods = ["GET", "POST"])
 def start():
+    current_month = now.month()
+    check_cal(current_month)
     session["username"] = "mli6@stuy.edu"
     print(session)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
-        return render_template("home.html", cal = month1)
+        return render_template("home.html", cal1 = month1, cal2 = month2, cal3 = month3)
     else:
         print("the court is not in session")
-        return render_template("home.html", cal = month1)
+        return render_template("home.html", cal1 = month1, cal2 = month2, cal3 = month3)
 
 
     
@@ -153,6 +157,13 @@ TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "515", "2016/10/08"
 TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "555", "2017/06/08", "3:35", "5:00")
 TMP.addReservation("NotDerry's Club", "mli8@stuy.edu", "NotDerry", "755", "2016/06/09", "3:35", "5:00")
 
+
+def check_cal(original_month):
+    if original_month < now.month():
+        current_month = now.month
+        generate_cal()
+        
+
 def generate_cal():
     hold_1 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month)
     hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month + 1)
@@ -205,6 +216,7 @@ generate_cal()
 
 print(month1)
 
+print(current_month)
       
     
 if __name__ == "__main__":
