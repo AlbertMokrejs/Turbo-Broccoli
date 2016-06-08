@@ -22,6 +22,9 @@
 	<br>
 	<input type="submit" name="button" value="Register">
 	<input type="submit" name="button" value="Cancel">
+	{% if Err %}
+        <p style="color: red;">Invalid Authentication Code</p>
+        {% endif %}
       </form>
     </div>
   </center>
