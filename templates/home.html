@@ -51,14 +51,14 @@
 								{% endif %}
 							{% endif %}
 							<td>
-							{% if cal[key][0][0] == 0 %}
+							{% if cal1[key][0][0] == 0 %}
 							{% else %}
-								{{cal[key][0][0]}} <br><br>
-								{% if cal[key][1]|length < 2 %}
+								{{cal1[key][0][0]}} <br><br>
+								{% if cal1[key][1]|length < 2 %}
 								{% else %}
 									{% set count2 = 1 %}
-									{% for count2 in range(1,cal[key]|length) %}
-										{{cal[key][count2][1]}} - room {{cal[key][count2][0]}}<br>
+									{% for count2 in range(1,cal1[key]|length) %}
+										{{cal1[key][count2][1]}} - room {{cal1[key][count2][0]}}<br>
 									{% endfor %}
 								{% endif %}
 							{% endif %}
