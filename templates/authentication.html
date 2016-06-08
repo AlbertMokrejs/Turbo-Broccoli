@@ -17,6 +17,9 @@
         <input type="text" name="authenValue"></input>
         <button type="submit" class="buttthree" value="Authenticate">Authenticate</button>
         </p>
+        {% if Err %}
+        <p style="color: red;">Invalid Authentication Code</p>
+        {% endif %}
       </form>
     </div>
 </body>
