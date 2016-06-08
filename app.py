@@ -49,10 +49,10 @@ def register():
                     return redirect("/authenticate/" + email + "")
                 else:
                     print("email taken")
-                    return render_template("register.html", text = "The email is already taken")
+                    return render_template("register.html", err = "The email is already taken")
             else:
                 print("passwords do not match")
-                return render_template("register.html", text = "Passwords do not match")
+                return render_template("register.html", err = "Passwords do not match")
         else:
             return redirect(url_for('start'))
     else:
@@ -73,6 +73,8 @@ def auth(username):
             TMP.verifty(username, str(request.form["authenValue"]))
             session["username"] = username
             return redirect(url_for('start'))
+        else:
+            return render_template("authentication.html", err = "the authentication number does not match")
     else:
         return render_template("authentication.html", username = username)
     
