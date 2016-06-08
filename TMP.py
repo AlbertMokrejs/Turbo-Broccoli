@@ -11,8 +11,8 @@ global UID
 #Archives databases if the version is wrong, and makes a new database if one doesn't exist. 
 #TableList sets the format.
 def checkGenerate(version):
-   if not os.path.isfile("Calendar.db"):
-      connect = sqlite3.connect("Calendar.db")
+   if not os.path.isfile(os.path.dirname(__file__) + "/Calendar.db"):
+      connect = sqlite3.connect(os.path.dirname(__file__) + "/Calendar.db")
       curs = connect.cursor()
       TableList = [["Reservations","club TEXT","email TEXT","name TEXT","room REAL","date TEXT","timeS TEXT","timeE TEXT", "UID REAL"],["Users","user TEXT","email TEXT","password TEXT","reservations BLOB","UID REAL","Club TEXT","verS TEXT", "isver INTEGER"],["version","v TEXT"]]
       for q in TableList: 
@@ -22,7 +22,7 @@ def checkGenerate(version):
       result = runSQL(True, """SELECT * FROM version;""") 
       for r in result: 
          if r[0] != version:
-            os.rename("Calendar.db","Archive.db") 
+            os.rename(os.path.dirname(__file__) + "/Calendar.db","Archive.db") 
             checkGenerate(version) 
    except: 
       pass #Gonna Graduate. Seniors 2016!
@@ -33,7 +33,7 @@ def checkGenerate(version):
 #runs SQL code in q
 #if doesReturn, returns the output
 def runSQL( doesReturn, q):
-   conn = sqlite3.connect("Calendar.db")
+   conn = sqlite3.connect(os.path.dirname(__file__) + "/Calendar.db")
    c = conn.cursor()
    if doesReturn:
       result = c.execute(q)
