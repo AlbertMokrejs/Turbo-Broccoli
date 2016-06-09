@@ -2,11 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import TMP
 import datetime
 import calendar
+import os
 now = datetime.datetime.now()
 
 app = Flask(__name__)
 TMP.checkGenerate("1")
-app.secret_key= 'asidh19201o231l2k3j'
+app.secret_key=  os.urandom(24)
+print(app.secret_key)
 
 
 month1 = {}
