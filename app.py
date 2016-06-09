@@ -12,14 +12,17 @@ app.secret_key= 'asidh19201o231l2k3j'
 month1 = {}
 month2 = {}
 month3 = {}
+toggle1 = False
+toggle2 = False
 current_month = 0
+current_year = 0
 
 
 #home route, subject to change what it loads
 @app.route("/", methods = ["GET", "POST"])
 def start():
-    current_month = now.month()
-    check_cal(current_month)
+    check_cal()
+    generate_cal()
     session["username"] = "mli6@stuy.edu"
     print(session)
     if  session != {}:
@@ -147,34 +150,41 @@ def set_res():
     roomt = int(float(request.args.get("room")))
     datet = request.args.get("date")
     if(TMP.addReservation(clubt, emailt, namet, roomt, datet, "3:35", "4;30")):
-        print(TMP.getReservations())
+        generate_cal()
         return "true"
     else:
         return "false"
 
-
-TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "355", "2016/06/09", "3:35", "5:00")
-TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "375", "2016/06/08", "3:35", "5:00") 
-TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "515", "2016/10/08", "3:35", "5:00")
-TMP.addReservation("Derry's Club", "mli6@stuy.edu", "Derry", "555", "2017/06/08", "3:35", "5:00")
-TMP.addReservation("NotDerry's Club", "mli8@stuy.edu", "NotDerry", "755", "2016/06/09", "3:35", "5:00")
-
-
-def check_cal(original_month):
-    if original_month < now.month():
+def check_cal():
+    if toggle1 == False:
+        current_month = now.month
+    if toggle2 == False:
+        current_year = now.year
+    if current_month < now.month:
         current_month = now.month
         generate_cal()
         
 
 def generate_cal():
-    hold_1 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month)
-    hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month + 1)
-    hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(2016,now.month + 2)
+    hold_1 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year,now.month)
+    hold_2 = []
+    hold_3 = []
+    if now.month + 1 > 12:
+        hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, 1)
+        hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, 2)
+    elif now.month + 1 > 12:
+        hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year,now.month + 1)
+        hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, 1)
+    else:
+        hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year,now.month + 1)
+        hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, now.month + 2)
     hold_res = parsed_res()
     counter = 0
     for x in range(5):
         for y in range(7):
             list1 = [[hold_1[x][y]]]
+            print(hold_1)
+            print(hold_2)
             list2 = [[hold_2[x][y]]]
             list3 = [[hold_3[x][y]]]
             for z in hold_res:
@@ -213,8 +223,6 @@ def parsed_res():
         elif x[4] > now.year:
             res_list.remove(x)
     return res_list
-
-generate_cal()
 
 print(month1)
 
