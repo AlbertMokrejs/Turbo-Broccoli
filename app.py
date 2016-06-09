@@ -12,6 +12,7 @@ app.secret_key= 'asidh19201o231l2k3j'
 month1 = {}
 month2 = {}
 month3 = {}
+months = {}
 toggle1 = False
 toggle2 = False
 current_month = 0
@@ -23,15 +24,16 @@ current_year = 0
 def start():
     check_cal()
     generate_cal()
-    session["username"] = "mli6@stuy.edu"
     print(session)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
-        return render_template("home.html", cal1 = month1, cal2 = month2, cal3 = month3)
+        print(month1)
+        return render_template("home.html", cal1 = month1, cal2 = month2, cal3 = month3, Username = Username, months = months)
     else:
         print("the court is not in session")
-        return render_template("home.html", cal1 = month1, cal2 = month2, cal3 = month3)
+        print(months)
+        return render_template("home.html", cal1 = month1, cal2 = month2, cal3 = month3, months = months)
 
 
     
@@ -52,10 +54,10 @@ def register():
                     return redirect("/authenticate/" + email + "")
                 else:
                     print("email taken")
-                    return render_template("register.html", err = "The email is already taken")
+                    return render_template("register.html", Err = "The email is already taken")
             else:
                 print("passwords do not match")
-                return render_template("register.html", err = "Passwords do not match")
+                return render_template("register.html", Err = "Passwords do not match")
         else:
             return redirect(url_for('start'))
     else:
@@ -77,7 +79,8 @@ def auth(username):
             session["username"] = username
             return redirect(url_for('start'))
         else:
-            return render_template("authentication.html", err = "the authentication number does not match")
+            print("did not work")
+            return render_template("authentication.html", Err = "the authentication number does not match", username = username)
     else:
         return render_template("authentication.html", username = username)
     
@@ -89,16 +92,16 @@ def login():
         if str(request.form["button"]) == "Login":
             email = str(request.form["umail"])
             password = str(request.form["password"])
-            if(TMP.login(email,password)):
-                session["username"] = email
-                return redirect(url_for('start'))
+            if TMP.getisVer(str(request.form["umail"])):
+                 if(TMP.login(email,password)):
+                     session["username"] = email
+                     return redirect(url_for('start'))
+                 else:
+                     return render_template("login.html", text = "Email/Password do not match")
             else:
-                return render_template("login.html", text = "Email/Password do not match")
+                return redirect("/authenticate/" + email + "")
     else:
-        if TMP.getisVer(str(request.form["umail"])):
-            return render_template("login.html")
-        else:
-            return redirect("/authenticate/" + email + "")
+        return render_template("login.html")
 
 
         
@@ -167,24 +170,29 @@ def check_cal():
 
 def generate_cal():
     hold_1 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year,now.month)
+    months[0] = findMonth(now.month)
     hold_2 = []
     hold_3 = []
     if now.month + 1 > 12:
         hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, 1)
+        months[1] = findMonth(1)
         hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, 2)
+        months[2] = findMonth(2)
     elif now.month + 1 > 12:
         hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year,now.month + 1)
+        months[1] = findMonth(now.month + 1)
         hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, 1)
+        months[2] = findMonth(1)
     else:
         hold_2 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year,now.month + 1)
+        months[1] = findMonth(now.month + 1)
         hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, now.month + 2)
+        months[2] = findMonth(now.month + 2)
     hold_res = parsed_res()
     counter = 0
     for x in range(5):
         for y in range(7):
             list1 = [[hold_1[x][y]]]
-            print(hold_1)
-            print(hold_2)
             list2 = [[hold_2[x][y]]]
             list3 = [[hold_3[x][y]]]
             for z in hold_res:
@@ -224,9 +232,43 @@ def parsed_res():
             res_list.remove(x)
     return res_list
 
-print(month1)
+def findMonth(num):
+    if num == 1:
+	return "JANUARY"
 
-print(current_month)
+    elif num == 2:
+	return "FEBRUARY"
+    
+    elif num == 3:
+	return "MARCH"
+    
+    elif num == 4:
+	return "APRIL"
+    
+    elif num == 5:
+	return "MAY"
+    
+    elif num == 6:
+	return "JUNE"
+    
+    elif num == 7:
+	return "JULY"
+    
+    elif num == 8:
+	return "AUGUST"
+    
+    elif num == 9:
+	return "SEPTEMBER"
+    
+    elif num == 10:
+	return "OCTOBER"
+    
+    elif num == 11:
+	return "NOVEMBER"
+    
+    elif num == 12:
+	return "DECEMBER"
+    
       
     
 if __name__ == "__main__":
