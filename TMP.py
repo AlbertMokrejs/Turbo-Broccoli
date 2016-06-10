@@ -59,8 +59,14 @@ def register(email, name, club, password):
 def getVerS(email):
    return findMatching("Users",{"email":email})[0][-2]
    
+def isEmail(email):
+   return len(findMatching("Users",{"email":email})) > 0
+   
 def getisVer(email):
-   return bool(findMatching("Users",{"email":email})[0][-1])
+   try:
+      return bool(findMatching("Users",{"email":email})[0][-1])
+   except:
+      return False
    
 def verifty(email,verS):
    runSQL(False, "UPDATE Users SET isVer = 1 WHERE email = '%s' AND verS = '%s';" % (email,verS))
