@@ -21,10 +21,12 @@
 	<br>
 	<br>
 	<input type="submit" name="button" value="Register">
-	<input type="submit" name="button" value="Cancel">
 	{% if Err %}
         <p style="color: red;">Invalid Authentication Code</p>
         {% endif %}
+      </form>
+      <form action="/" method="GET">
+        <input type="submit" name="butotn" value="Back"/>
       </form>
     </div>
   </center>
