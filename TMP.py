@@ -22,7 +22,7 @@ def checkGenerate(version):
       result = runSQL(True, """SELECT * FROM version;""") 
       for r in result: 
          if r[0] != version:
-            os.rename(os.path.dirname(__file__) + "/Calendar.db","Archive.db") 
+            os.rename(os.path.dirname(__file__) + "/Calendar.db",os.path.dirname(__file__) + "/Archive.db") 
             checkGenerate(version) 
    except: 
       pass #Gonna Graduate. Seniors 2016!
