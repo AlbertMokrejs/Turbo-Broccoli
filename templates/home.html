@@ -22,103 +22,62 @@
             <a href="/login" data-ajax="false" data-role="none" class="butttwo"><span>Log In</span></a> {% endif %}
         </div>
         <div id="content">
-            <div id="calendar">
-                <table align="center" id="mesa">
-                    <caption id="month">MONTH</caption>
-                    <col class="weekend">
-                    <col class="weekday" span="5">
-                    <col class="weekend">
-                    <thead>
+	  <div id="buttonTable">
+	    <div id="left">
+	      <button align="center" id="leftbutt">&#60;</button>
+	    </div>
+	    <div id="calendar">
+              <table align="center" id="mesa">
+                <caption id="month">MONTH</caption>
+                <col class="weekend">
+                <col class="weekday" span="5">
+                <col class="weekend">
+                      <thead>
                         <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
+                          <th>Sun</th>
+                          <th>Mon</th>
+                          <th>Tue</th>
+                          <th>Wed</th>
+                          <th>Thu</th>
+                          <th>Fri</th>
+                          <th>Sat</th>
                         </tr>
-                    </thead>
-                    <tbody>
-						<tr>
-						{% set key = 0 %}
-                        {% for key in range(0,35)%}
-							{% if key == 0 %}
+                      </thead>
+                      <tbody>
+			<tr>
+			  {% set key = 0 %}
+                          {% for key in range(0,35)%}
+			  {% if key == 0 %}
+			  {% else %}
+			  {% if key % 7 == 0 %}
+			</tr>
+			<tr>
+			  {% endif %}
+			  {% endif %}
+			  <td>
+			    {% if cal1[key][0][0] == 0 %}
+			    {% else %}
+			    {{cal1[key][0][0]}} <br><br>
+			    {% if cal1[key][1]|length < 2 %}
 							{% else %}
-								{% if key % 7 == 0 %}
-									</tr>
-									<tr>
-								{% endif %}
+							{% set count2 = 1 %}
+							{% for count2 in range(1,cal1[key]|length) %}
+							{{cal1[key][count2][1]}} - room {{cal1[key][count2][0]}}<br>
+							{% endfor %}
 							{% endif %}
-							<td>
-							{% if cal1[key][0][0] == 0 %}
-							{% else %}
-								{{cal1[key][0][0]}} <br><br>
-								{% if cal1[key][1]|length < 2 %}
-								{% else %}
-									{% set count2 = 1 %}
-									{% for count2 in range(1,cal1[key]|length) %}
-										{{cal1[key][count2][1]}} - room {{cal1[key][count2][0]}}<br>
-									{% endfor %}
-								{% endif %}
 							{% endif %}
 							</td>
-							{% set key = key + 1 %}
-						{% endfor %}
-						</tr>
-                        <!--
-						      @SHAWN: REPLACE ALL THIS COMMENT W A JINJA TAG
-						      I MADE A PYTHON FILE THAT RETURNS THE TABLE ROWS AND CELLS WITH THE CORRECT DAYS IN THEM
-						      IT IS FORMATTED AS JUST A PLAIN STRING
-						      <tr>
-								<td><div class="day"></div>1</td>
-								<td><div class="day"></div>2</td>
-								<td><div class="day"></div>3</td>
-								<td><div class="day"></div>4</td>
-								<td><div class="day"></div>5</td>
-								<td><div class="day"></div>6</td>
-								<td><div class="day"></div>7</td>
-							</tr>
-							<tr>
-								<td><div class="day"></div>8</td>
-								<td><div class="day"></div>9</td>
-								<td><div class="day"></div>10</td>
-								<td><div class="day"></div>11</td>
-								<td><div class="day"></div>12</td>
-								<td><div class="day"></div>13</td>
-								<td><div class="day"></div>14</td>
-							</tr>
-							<tr>
-								<td><div class="day"></div>15</td>
-								<td><div class="day"></div>16</td>
-								<td><div class="day"></div>17</td>
-								<td><div class="day"></div>18</td>
-								<td><div class="day"></div>19</td>
-								<td><div class="day"></div>20</td>
-								<td><div class="day"></div>21</td>
-							</tr>
-							<tr>
-								<td><div class="day"></div>22</td>
-								<td><div class="day"></div>23</td>
-								<td><div class="day"></div>24</td>
-								<td><div class="day"></div>25</td>
-								<td><div class="day"></div>26</td>
-								<td><div class="day"></div>27</td>
-								<td><div class="day"></div>28</td>
-							</tr>
-							<tr>
-								<td><div class="day"></div>29</td>
-								<td><div class="day"></div>30</td>
-								<td><div class="day"></div>31</td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-								<td><div class="day"></div></td>
-							</tr>
-						-->
-                    </tbody>
-                </table>
-            </div>
+			  {% set key = key + 1 %}
+			  {% endfor %}
+			</tr>
+                      </tbody>
+              </table>
+	    </div>
+	    <div id="right">
+	      
+	      <button align="center" id="rightbutt">&#62;</button>
+	    </div>
+		
             <div id="bookroom">
                 {% if Username %}
                 <a href="#myPopup" data-rel="popup" class="button"><span>Book Date</span></a> {% endif %}
