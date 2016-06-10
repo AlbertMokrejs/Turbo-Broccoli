@@ -26,7 +26,6 @@ current_year = 0
 def start():
     check_cal()
     generate_cal()
-    print(session)
     if  session != {}:
         print("the court is in session")
         Username = session['username']
@@ -191,6 +190,7 @@ def generate_cal():
         hold_3 = calendar.Calendar(calendar.SUNDAY).monthdayscalendar(now.year + 1, now.month + 2)
         months[2] = findMonth(now.month + 2)
     hold_res = parsed_res()
+    counter = 0
     for x in range(5):
         for y in range(7):
             list1 = [[hold_1[x][y]]]
@@ -198,7 +198,6 @@ def generate_cal():
             list3 = [[hold_3[x][y]]]
             for z in hold_res:
                 if z[2] == list1[0][0]:
-                    print(z[2], list1)
                     if z[3] == now.month:
                         list1.append([z[1],z[0]])
                     elif z[3] == now.month + 1:
@@ -208,13 +207,14 @@ def generate_cal():
             month1[counter] = list1
             month2[counter] = list2
             month3[counter] = list3
+            counter = counter + 1
+
     
 def parsed_res():
     list_len = len(TMP.getReservations())
     res_list = [[0 for x in range(5)] for y in range(list_len)]
     check = 0
     for x in TMP.getReservations():
-        print(x)
         hold_club = x[0]
         hold_room = x[3]
         hold_date = x[4]
@@ -227,8 +227,6 @@ def parsed_res():
         check = check + 1
 
 
-    print res_list
-    print now.month
     for x in res_list:
         if x[3] > (now.month + 3):
             print("check 1")
@@ -238,8 +236,6 @@ def parsed_res():
             print(now.year)
             print(x[4])
             res_list.remove(x)
-    print("check")
-    print res_list
     return res_list
 
 def findMonth(num):
