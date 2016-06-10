@@ -93,14 +93,17 @@ def login():
         if str(request.form["button"]) == "Login":
             email = str(request.form["umail"])
             password = str(request.form["password"])
-            if TMP.getisVer(str(request.form["umail"])):
-                 if(TMP.login(email,password)):
-                     session["username"] = email
-                     return redirect(url_for('start'))
-                 else:
-                     return render_template("login.html", text = "Email/Password do not match")
+            if TMP.isEmail(str(request.form["umail"])):
+                if TMP.getisVer(str(request.form["umail"])):
+                    if(TMP.login(email,password)):
+                        session["username"] = email
+                        return redirect(url_for('start'))
+                    else:
+                        return render_template("login.html", Err = "Email/Password do not match")
+                else:
+                    return redirect("/authenticate/" + email + "")
             else:
-                return redirect("/authenticate/" + email + "")
+                return render_template("login.html", Err = "Email does not exist")
     else:
         return render_template("login.html")
 
