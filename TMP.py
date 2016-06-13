@@ -192,7 +192,7 @@ def send_email( recipient, subject, body):
 
     # Prepare actual message
     message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", TO, SUBJECT, TEXT)
+    """ % (FROM, TO, SUBJECT, TEXT)
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.ehlo()
     server.starttls()
