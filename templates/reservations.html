@@ -5,21 +5,25 @@
   <link rel="stylesheet" type="text/css" href="../static/forms.css">
 </head>
 <body>
-<div id="container">
-<div id="header">
-    <h1 align="center">Reservations</h1>
-    <br>
-</div>
-    <div id="content">
-    <ol>
-    {% for reservation in reservations %}
-    <li>
-      <form action="reservations/{{reservation[7]}}" method="POST">
-	<p>Room {{reservation[3]}} on {{reservation[4]}} <button class="buttthree" type="submit" value="Cancel"><span>Cancel</span></button></p>
-      </form>
-    </li>
-    {% endfor %}
-    </ol>
+  <div id="container">
+    <div id="header">
+      <h1 align="center">Reservations</h1>
+      <br>
     </div>
+    <div id="content">
+      <ol>
+	{% for reservation in reservations %}
+	<li>
+	  <form action="reservations/{{reservation[7]}}" method="POST">
+	    <p>Room {{reservation[3]}} on {{reservation[4]}} <button class="buttthree" type="submit" value="Cancel"><span>Cancel</span></button></p>
+	  </form>
+	</li>
+	{% endfor %}
+      </ol>
+    </div>
+    <form action="/" method="POST">
+      <input type="submit" name="butotn" value="Back" class="buttthree" style="float: left;">
+    </form>
+  </div>
 </body>
 </html>

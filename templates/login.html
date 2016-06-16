@@ -5,22 +5,26 @@
   <link rel="stylesheet" type="text/css" href="../static/forms.css">
 </head>
 <body>
-<div id="container">
-<div id="header">
-    <h1 align="center">Login</h1>
-    <br>
-</div>
+  <div id="container">
+    <div id="header">
+      <h1 align="center">Login</h1>
+      <br>
+    </div>
     <div id="content">
       <form action="/login" method="POST">
 	<input type="email" name="umail" placeholder="Email" value=""required><br>
 	<input type="password" name="password" placeholder="Password" value=""required><br><br>
-	<input type="submit" name="button" value="Login">
+	<input type="submit" name="button" value="Login" class="buttthree" style="float: left;">
       </form>
-      <form action="/" method="GET">
-	<input type="submit" name="butotn" value="Back"/>
+      <br>
+      <br>
+      <br>
+      <form action="/" method="POST">
+	<input type="submit" name="butotn" value="Back" class="buttthree" style="float: left;">
       </form>
     </div>
+    <br>
     <p style="color: red;">{{Err}}</p>
 </body>
 </html>
-								      
+

@@ -14,15 +14,17 @@
       <form action="/authenticate/{{username}}" method="POST">
         <p>An authentication email was sent to you with a confirmation code. Please input the code below.</p>
         <p>
-        <input type="text" name="authenValue"></input>
-        <button type="submit" class="buttthree" value="Authenticate">Authenticate</button>
+          <input type="text" name="authenValue"></input>
+	  <br>
+          <button type="submit" class="buttthree" value="Authenticate" style="float: left;">Authenticate</button>
         </p>
         {% if Err %}
         <p style="color: red;">Invalid Authentication Code</p>
         {% endif %}
       </form>
-      <form action="/" method="GET">
-        <input type="submit" name="butotn" value="Back"/>
+      <br>
+      <form action="/" method="POST">
+	<input type="submit" name="butotn" value="Back" class="buttthree" style="float: left;">
       </form>
     </div>
 </body>
